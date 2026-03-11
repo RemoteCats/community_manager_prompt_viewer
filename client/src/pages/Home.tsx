@@ -1,9 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
-import { Search, Copy, Check, Filter, X, Heart, BookOpen } from "lucide-react";
+import { Search, Copy, Check, Filter, X, Heart, BookOpen, FolderOpen, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useFavorites } from "@/hooks/useFavorites";
+import { useCollections } from "@/hooks/useCollections";
+import { AddToCollectionMenu } from "@/components/AddToCollectionMenu";
+import { CollectionsModal } from "@/components/CollectionsModal";
+import { exportToCSV, exportToPDF } from "@/lib/exportUtils";
 
 interface Prompt {
   id: number;
@@ -24,8 +28,17 @@ export default function Home() {
   const [copiedId, setCopiedId] = useState<number | null>(null);
   const [showFilters, setShowFilters] = useState(false);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [showCollectionsModal, setShowCollectionsModal] = useState(false);
   
-  const { favorites, toggleFavorite, isFavorite, clearFavorites, count: favoritesCount } = useFavorites();
+  const { favorites, toggleFavorite, isFavorite, count: favoritesCount } = useFavorites();
+  const {
+    collections,
+    createCollection,
+    updateCollection,
+    deleteCollection,
+    addPromptToCollection,
+    removePromptFromCollection,
+  } = useCollections();
 
   // Load prompts from JSON
   useEffect(() => {
@@ -56,7 +69,6 @@ export default function Home() {
   // Filter prompts
   const filteredPrompts = useMemo(() => {
     return prompts.filter((prompt) => {
-      // Check if favorites-only filter is active
       if (showFavoritesOnly && !isFavorite(prompt.id)) {
         return false;
       }
@@ -101,6 +113,27 @@ export default function Home() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
+  // Export favorites
+  const exportFavorites = (format: 'csv' | 'pdf') => {
+    const favoritePrompts = prompts.filter((p) => isFavorite(p.id));
+    if (favoritePrompts.length === 0) {
+      alert('No favorite prompts to export');
+      return;
+    }
+
+    const filename = `favorites_${new Date().toISOString().split('T')[0]}.${format}`;
+    if (format === 'csv') {
+      exportToCSV(favoritePrompts, filename);
+    } else {
+      exportToPDF(favoritePrompts, filename);
+    }
+  };
+
+  const handleCreateAndAddToCollection = (promptId: number, collectionName: string) => {
+    const newCollection = createCollection(collectionName);
+    addPromptToCollection(newCollection.id, promptId);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
@@ -127,8 +160,8 @@ export default function Home() {
             </div>
 
             {/* Search Bar */}
-            <div className="flex gap-2">
-              <div className="flex-1 relative">
+            <div className="flex gap-2 flex-wrap">
+              <div className="flex-1 relative min-w-64">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   placeholder="Search prompts by keyword, category, or tone..."
@@ -153,7 +186,35 @@ export default function Home() {
                 <Heart className="w-4 h-4 mr-2" />
                 Favorites {favoritesCount > 0 && `(${favoritesCount})`}
               </Button>
+              <Button
+                onClick={() => setShowCollectionsModal(true)}
+                variant="outline"
+                className="border-border"
+              >
+                <FolderOpen className="w-4 h-4 mr-2" />
+                Collections {collections.length > 0 && `(${collections.length})`}
+              </Button>
             </div>
+
+            {/* Export Favorites */}
+            {favoritesCount > 0 && (
+              <div className="flex gap-2">
+                <button
+                  onClick={() => exportFavorites('csv')}
+                  className="px-3 py-2 text-xs font-semibold uppercase tracking-widest bg-muted hover:bg-border text-foreground rounded transition flex items-center gap-2"
+                >
+                  <Download className="w-3 h-3" />
+                  Export Favorites as CSV
+                </button>
+                <button
+                  onClick={() => exportFavorites('pdf')}
+                  className="px-3 py-2 text-xs font-semibold uppercase tracking-widest bg-muted hover:bg-border text-foreground rounded transition flex items-center gap-2"
+                >
+                  <Download className="w-3 h-3" />
+                  Export Favorites as PDF
+                </button>
+              </div>
+            )}
 
             {/* Filters */}
             {showFilters && (
@@ -401,7 +462,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex-shrink-0 flex gap-2">
+                  <div className="flex-shrink-0 flex gap-1">
                     <button
                       onClick={() => toggleFavorite(prompt.id)}
                       className="p-2 hover:bg-muted rounded transition"
@@ -415,6 +476,16 @@ export default function Home() {
                         }`}
                       />
                     </button>
+                    <AddToCollectionMenu
+                      promptId={prompt.id}
+                      collections={collections}
+                      onAddToCollection={(collectionId) =>
+                        addPromptToCollection(collectionId, prompt.id)
+                      }
+                      onCreateAndAdd={(name) =>
+                        handleCreateAndAddToCollection(prompt.id, name)
+                      }
+                    />
                     <button
                       onClick={() => copyToClipboard(prompt.prompt, prompt.id)}
                       className="p-2 hover:bg-muted rounded transition"
@@ -433,6 +504,17 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      {/* Collections Modal */}
+      <CollectionsModal
+        isOpen={showCollectionsModal}
+        onClose={() => setShowCollectionsModal(false)}
+        collections={collections}
+        allPrompts={prompts}
+        onCreateCollection={createCollection}
+        onDeleteCollection={deleteCollection}
+        onUpdateCollection={updateCollection}
+      />
 
       {/* Footer */}
       <footer className="border-t border-border bg-white mt-12">
