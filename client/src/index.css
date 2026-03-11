@@ -43,39 +43,39 @@
 }
 
 :root {
-  --primary: #0066cc;
+  --primary: #1a1a1a;
   --primary-foreground: #ffffff;
-  --sidebar-primary: #0052a3;
+  --sidebar-primary: #2a2a2a;
   --sidebar-primary-foreground: #ffffff;
-  --chart-1: #00bcd4;
-  --chart-2: #0066cc;
-  --chart-3: #7c3aed;
-  --chart-4: #ff6b35;
-  --chart-5: #ff8c42;
-  --radius: 0.5rem;
-  --background: #f0f9ff;
-  --foreground: #001a33;
+  --chart-1: #4a4a4a;
+  --chart-2: #333333;
+  --chart-3: #555555;
+  --chart-4: #666666;
+  --chart-5: #777777;
+  --radius: 0.25rem;
+  --background: #fafaf8;
+  --foreground: #1a1a1a;
   --card: #ffffff;
-  --card-foreground: #001a33;
+  --card-foreground: #1a1a1a;
   --popover: #ffffff;
-  --popover-foreground: #001a33;
-  --secondary: #00bcd4;
-  --secondary-foreground: #001a33;
-  --muted: #e0f2fe;
-  --muted-foreground: #0c4a6e;
-  --accent: #ff6b35;
+  --popover-foreground: #1a1a1a;
+  --secondary: #4a4a4a;
+  --secondary-foreground: #1a1a1a;
+  --muted: #f0f0f0;
+  --muted-foreground: #666666;
+  --accent: #2a2a2a;
   --accent-foreground: #ffffff;
-  --destructive: #dc2626;
+  --destructive: #8b0000;
   --destructive-foreground: #ffffff;
-  --border: #cffafe;
-  --input: #e0f2fe;
-  --ring: #0066cc;
+  --border: #e0e0e0;
+  --input: #f5f5f5;
+  --ring: #1a1a1a;
   --sidebar: #ffffff;
-  --sidebar-foreground: #001a33;
-  --sidebar-accent: #00bcd4;
-  --sidebar-accent-foreground: #001a33;
-  --sidebar-border: #cffafe;
-  --sidebar-ring: #0066cc;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-accent: #4a4a4a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e0e0e0;
+  --sidebar-ring: #1a1a1a;
 }
 
 .dark {
@@ -119,6 +119,18 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  code, pre {
+    font-family: "Inconsolata", monospace;
+    font-weight: 400;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
