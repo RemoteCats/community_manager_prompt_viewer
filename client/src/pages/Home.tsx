@@ -332,7 +332,7 @@ export default function Home() {
             Community Manager OS • AI Prompt Library • {prompts.length.toLocaleString()} prompts
           </p>
           <p className="text-xs text-slate-500 mt-2">
-            Built with ❤️ for community managers
+            Made by Spark Collective ✨
           </p>
         </div>
       </footer>
