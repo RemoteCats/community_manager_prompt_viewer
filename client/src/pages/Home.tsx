@@ -1,8 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
-import { Search, Copy, Check, Filter, X } from "lucide-react";
+import { Search, Copy, Check, Filter, X, Heart, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface Prompt {
   id: number;
@@ -22,6 +23,9 @@ export default function Home() {
   const [selectedSituation, setSelectedSituation] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<number | null>(null);
   const [showFilters, setShowFilters] = useState(false);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  
+  const { favorites, toggleFavorite, isFavorite, clearFavorites, count: favoritesCount } = useFavorites();
 
   // Load prompts from JSON
   useEffect(() => {
@@ -52,6 +56,11 @@ export default function Home() {
   // Filter prompts
   const filteredPrompts = useMemo(() => {
     return prompts.filter((prompt) => {
+      // Check if favorites-only filter is active
+      if (showFavoritesOnly && !isFavorite(prompt.id)) {
+        return false;
+      }
+
       const matchesSearch =
         searchQuery === "" ||
         prompt.prompt.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -81,6 +90,8 @@ export default function Home() {
     selectedCategory,
     selectedTone,
     selectedSituation,
+    showFavoritesOnly,
+    favorites,
   ]);
 
   // Copy to clipboard
@@ -133,6 +144,14 @@ export default function Home() {
               >
                 <Filter className="w-4 h-4 mr-2" />
                 Filters
+              </Button>
+              <Button
+                onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+                variant={showFavoritesOnly ? "default" : "outline"}
+                className={showFavoritesOnly ? "bg-foreground text-white" : "border-border"}
+              >
+                <Heart className="w-4 h-4 mr-2" />
+                Favorites {favoritesCount > 0 && `(${favoritesCount})`}
               </Button>
             </div>
 
@@ -324,7 +343,15 @@ export default function Home() {
 
             {/* Results Count */}
             <div className="text-xs text-muted-foreground">
-              Showing {filteredPrompts.length} of {prompts.length} prompts
+              {showFavoritesOnly ? (
+                <>
+                  Showing {filteredPrompts.length} favorite{filteredPrompts.length !== 1 ? "s" : ""} of {favoritesCount} saved
+                </>
+              ) : (
+                <>
+                  Showing {filteredPrompts.length} of {prompts.length} prompts
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -334,8 +361,11 @@ export default function Home() {
       <main className="container py-8">
         {filteredPrompts.length === 0 ? (
           <div className="text-center py-12">
+            <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-50" />
             <p className="text-muted-foreground">
-              No prompts found. Try adjusting your filters or search query.
+              {showFavoritesOnly
+                ? "No favorite prompts yet. Start bookmarking prompts to save them here!"
+                : "No prompts found. Try adjusting your filters or search query."}
             </p>
           </div>
         ) : (
@@ -371,17 +401,32 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => copyToClipboard(prompt.prompt, prompt.id)}
-                    className="flex-shrink-0 p-2 hover:bg-muted rounded transition"
-                    title="Copy prompt"
-                  >
-                    {copiedId === prompt.id ? (
-                      <Check className="w-5 h-5 text-foreground" />
-                    ) : (
-                      <Copy className="w-5 h-5 text-muted-foreground hover:text-foreground" />
-                    )}
-                  </button>
+                  <div className="flex-shrink-0 flex gap-2">
+                    <button
+                      onClick={() => toggleFavorite(prompt.id)}
+                      className="p-2 hover:bg-muted rounded transition"
+                      title={isFavorite(prompt.id) ? "Remove from favorites" : "Add to favorites"}
+                    >
+                      <Heart
+                        className={`w-5 h-5 ${
+                          isFavorite(prompt.id)
+                            ? "fill-foreground text-foreground"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      />
+                    </button>
+                    <button
+                      onClick={() => copyToClipboard(prompt.prompt, prompt.id)}
+                      className="p-2 hover:bg-muted rounded transition"
+                      title="Copy prompt"
+                    >
+                      {copiedId === prompt.id ? (
+                        <Check className="w-5 h-5 text-foreground" />
+                      ) : (
+                        <Copy className="w-5 h-5 text-muted-foreground hover:text-foreground" />
+                      )}
+                    </button>
+                  </div>
                 </div>
               </Card>
             ))}
