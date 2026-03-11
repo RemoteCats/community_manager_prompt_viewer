@@ -1,0 +1,802 @@
+[
+  {
+    "id": 1,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Create a professional welcome message for a new Discord member joining our community. Include the community's mission, key channels to explore, and a link to our onboarding guide. Keep it concise and professional."
+  },
+  {
+    "id": 2,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Write a warm and welcoming message to greet a new Discord member. Make them feel excited about joining and highlight the most fun aspects of our community. Use a friendly tone and include an emoji or two."
+  },
+  {
+    "id": 3,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "New member just joined",
+    "prompt": "Craft an energetic welcome message for Discord that gets new members excited! Emphasize the vibrant community culture, highlight trending discussions, and encourage them to introduce themselves in the #introductions channel."
+  },
+  {
+    "id": 4,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Empathetic & Supportive",
+    "situation": "New member just joined",
+    "prompt": "Write a supportive welcome message for new Discord members who might be nervous about joining. Acknowledge that it's normal to feel overwhelmed, offer guidance on finding their niche, and provide a direct contact for questions."
+  },
+  {
+    "id": 5,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Authoritative & Direct",
+    "situation": "New member just joined",
+    "prompt": "Create a direct welcome message for Discord that clearly outlines community rules, expectations, and the onboarding process. Be clear and authoritative while remaining respectful."
+  },
+  {
+    "id": 6,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Playful & Humorous",
+    "situation": "New member just joined",
+    "prompt": "Write a playful welcome message for Discord with light humor. Make jokes about joining the 'Discord family,' reference community inside jokes if any, and make the new member laugh while explaining key channels."
+  },
+  {
+    "id": 7,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Inspirational & Motivational",
+    "situation": "New member just joined",
+    "prompt": "Craft an inspirational welcome message for Discord that motivates new members to actively participate. Share a success story of a member who grew within the community and encourage them to pursue their goals here."
+  },
+  {
+    "id": 8,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Educational & Informative",
+    "situation": "New member just joined",
+    "prompt": "Create an informative welcome message for Discord that educates new members about the community structure. Explain the purpose of each channel, how to use Discord features, and where to find resources."
+  },
+  {
+    "id": 9,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Urgent & Action-Oriented",
+    "situation": "New member just joined",
+    "prompt": "Write an action-oriented welcome message for Discord that immediately directs new members to complete onboarding steps. Include a checklist of tasks to complete in their first 24 hours."
+  },
+  {
+    "id": 10,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Inclusive & Community-Focused",
+    "situation": "New member just joined",
+    "prompt": "Create an inclusive welcome message for Discord that emphasizes belonging and diversity. Make it clear that all backgrounds, experiences, and perspectives are valued and celebrated in the community."
+  },
+  {
+    "id": 11,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Draft a professional re-engagement message for a Discord member who hasn't been active for 30+ days. Remind them of the community's value and invite them back with specific channel recommendations."
+  },
+  {
+    "id": 12,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Write a warm message to a Discord member who's been inactive. Let them know they're missed, share what's new in the community, and make it easy for them to jump back in."
+  },
+  {
+    "id": 13,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Create an energetic re-engagement message for an inactive Discord member. Highlight exciting recent events, new features, or trending discussions they've missed and encourage them to rejoin the action."
+  },
+  {
+    "id": 14,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Empathetic & Supportive",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Write a supportive message to an inactive Discord member. Acknowledge that life gets busy, express understanding, and gently invite them back without pressure or guilt-tripping."
+  },
+  {
+    "id": 15,
+    "platform": "Discord",
+    "category": "Welcome & Onboarding",
+    "tone": "Authoritative & Direct",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Create a direct re-engagement message for an inactive Discord member. State clearly that we value their presence and outline the steps to reconnect with the community."
+  },
+  {
+    "id": 16,
+    "platform": "Discord",
+    "category": "Engagement & Activation",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Generate a professional prompt to encourage new Discord members to introduce themselves and share their background. Include a template or example of a good introduction."
+  },
+  {
+    "id": 17,
+    "platform": "Discord",
+    "category": "Engagement & Activation",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Create a friendly engagement prompt asking new Discord members to share their interests and hobbies. Make it feel like a casual conversation starter rather than a formal questionnaire."
+  },
+  {
+    "id": 18,
+    "platform": "Discord",
+    "category": "Engagement & Activation",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "New member just joined",
+    "prompt": "Write an energetic prompt to get new Discord members excited about participating. Ask them to share their biggest goal or project and encourage others to respond with support and ideas."
+  },
+  {
+    "id": 19,
+    "platform": "Discord",
+    "category": "Engagement & Activation",
+    "tone": "Empathetic & Supportive",
+    "situation": "New member just joined",
+    "prompt": "Create a supportive engagement prompt for new Discord members. Ask them about challenges they're facing and position the community as a place where they can find help and support."
+  },
+  {
+    "id": 20,
+    "platform": "Discord",
+    "category": "Engagement & Activation",
+    "tone": "Authoritative & Direct",
+    "situation": "New member just joined",
+    "prompt": "Write a direct engagement prompt that clearly outlines expectations for participation. Explain what types of contributions are valued and how members can get involved immediately."
+  },
+  {
+    "id": 21,
+    "platform": "Slack",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Create a professional welcome message for a new Slack workspace member. Include workspace overview, key channels to join, and a link to the onboarding documentation. Keep it structured and easy to scan."
+  },
+  {
+    "id": 22,
+    "platform": "Slack",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Write a warm welcome message for a new Slack member. Use a conversational tone, mention a few fun facts about the team, and encourage them to say hello in #introductions."
+  },
+  {
+    "id": 23,
+    "platform": "Slack",
+    "category": "Welcome & Onboarding",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "New member just joined",
+    "prompt": "Craft an energetic welcome message for Slack that gets new members excited. Highlight team achievements, upcoming projects, and opportunities to make an impact from day one."
+  },
+  {
+    "id": 24,
+    "platform": "Slack",
+    "category": "Welcome & Onboarding",
+    "tone": "Empathetic & Supportive",
+    "situation": "New member just joined",
+    "prompt": "Write a supportive welcome message for new Slack members. Acknowledge the overwhelm of joining a new workspace and provide clear guidance on who to reach out to with questions."
+  },
+  {
+    "id": 25,
+    "platform": "Slack",
+    "category": "Welcome & Onboarding",
+    "tone": "Authoritative & Direct",
+    "situation": "New member just joined",
+    "prompt": "Create a direct welcome message for Slack that outlines workspace guidelines, communication norms, and the onboarding checklist. Be clear about expectations."
+  },
+  {
+    "id": 26,
+    "platform": "Facebook Groups",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Draft a professional welcome post for a new Facebook Group member. Include the group's purpose, community guidelines, and pinned resources. Use a professional but approachable tone."
+  },
+  {
+    "id": 27,
+    "platform": "Facebook Groups",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Write a warm welcome post for new Facebook Group members. Make them feel like they're joining a family, share a bit about the group culture, and encourage them to introduce themselves."
+  },
+  {
+    "id": 28,
+    "platform": "Facebook Groups",
+    "category": "Welcome & Onboarding",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "New member just joined",
+    "prompt": "Create an energetic welcome post for Facebook that celebrates new members joining. Highlight recent group wins, upcoming events, and exciting discussions happening right now."
+  },
+  {
+    "id": 29,
+    "platform": "LinkedIn Communities",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Craft a professional welcome message for a new LinkedIn Community member. Emphasize professional development, networking opportunities, and the community's commitment to excellence."
+  },
+  {
+    "id": 30,
+    "platform": "LinkedIn Communities",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Write a warm welcome message for new LinkedIn Community members. Highlight the supportive nature of the community and encourage them to share their professional journey."
+  },
+  {
+    "id": 31,
+    "platform": "Reddit",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Create a professional welcome post for a new subreddit member. Include subreddit rules, posting guidelines, and links to FAQ and wiki. Use a clear, structured format."
+  },
+  {
+    "id": 32,
+    "platform": "Reddit",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Write a warm welcome post for new subreddit members. Use Reddit culture and inside jokes appropriately, encourage them to lurk first, then participate when ready."
+  },
+  {
+    "id": 33,
+    "platform": "Twitter/X",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Draft a professional welcome thread for new Twitter/X community members. Include key accounts to follow, hashtags to track, and resources to get started."
+  },
+  {
+    "id": 34,
+    "platform": "Twitter/X",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Write a warm welcome tweet for new community members. Keep it concise, friendly, and include a call-to-action to introduce themselves with a specific hashtag."
+  },
+  {
+    "id": 35,
+    "platform": "Telegram",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Create a professional welcome message for a new Telegram group member. Include group rules, pinned messages, and clear guidelines for participation."
+  },
+  {
+    "id": 36,
+    "platform": "Telegram",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Write a warm welcome message for new Telegram group members. Use a conversational tone, mention what makes the group special, and encourage them to introduce themselves."
+  },
+  {
+    "id": 37,
+    "platform": "Circle.so",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Craft a professional welcome message for a new Circle.so community member. Include space overview, key spaces to explore, and onboarding resources."
+  },
+  {
+    "id": 38,
+    "platform": "Circle.so",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Write a warm welcome message for new Circle.so members. Highlight the community's values, encourage participation, and make them feel welcomed to contribute."
+  },
+  {
+    "id": 39,
+    "platform": "WhatsApp Groups",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Create a professional welcome message for a new WhatsApp group member. Include group purpose, communication guidelines, and how to mute notifications if needed."
+  },
+  {
+    "id": 40,
+    "platform": "WhatsApp Groups",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Write a warm welcome message for new WhatsApp group members. Keep it brief, friendly, and include a fun fact about the group or its members."
+  },
+  {
+    "id": 41,
+    "platform": "YouTube Community Tab",
+    "category": "Welcome & Onboarding",
+    "tone": "Professional & Formal",
+    "situation": "New member just joined",
+    "prompt": "Draft a professional welcome post for the YouTube Community tab. Include channel mission, types of content to expect, and how to engage with the community."
+  },
+  {
+    "id": 42,
+    "platform": "YouTube Community Tab",
+    "category": "Welcome & Onboarding",
+    "tone": "Friendly & Warm",
+    "situation": "New member just joined",
+    "prompt": "Write a warm welcome post for YouTube Community members. Thank them for subscribing, share what's coming, and encourage them to comment and share their thoughts."
+  },
+  {
+    "id": 43,
+    "platform": "Discord",
+    "category": "Moderation & Conflict Resolution",
+    "tone": "Professional & Formal",
+    "situation": "Conflict or argument between members",
+    "prompt": "Generate a professional moderation message for Discord addressing a conflict between two members. Remind them of community guidelines, ask them to take the conversation to DMs, and offer mediation if needed."
+  },
+  {
+    "id": 44,
+    "platform": "Discord",
+    "category": "Moderation & Conflict Resolution",
+    "tone": "Empathetic & Supportive",
+    "situation": "Conflict or argument between members",
+    "prompt": "Write an empathetic moderation message for Discord conflict. Acknowledge both perspectives, validate their feelings, and guide them toward a constructive resolution."
+  },
+  {
+    "id": 45,
+    "platform": "Discord",
+    "category": "Moderation & Conflict Resolution",
+    "tone": "Authoritative & Direct",
+    "situation": "Conflict or argument between members",
+    "prompt": "Create a direct moderation message for Discord that firmly addresses the conflict. State the violation clearly, explain consequences, and outline the path forward."
+  },
+  {
+    "id": 46,
+    "platform": "Slack",
+    "category": "Moderation & Conflict Resolution",
+    "tone": "Professional & Formal",
+    "situation": "Conflict or argument between members",
+    "prompt": "Draft a professional moderation message for Slack addressing workplace conflict. Reference company values, suggest moving to a private channel, and offer HR support if needed."
+  },
+  {
+    "id": 47,
+    "platform": "Slack",
+    "category": "Moderation & Conflict Resolution",
+    "tone": "Empathetic & Supportive",
+    "situation": "Conflict or argument between members",
+    "prompt": "Write an empathetic moderation message for Slack conflict. Acknowledge the tension, validate concerns, and suggest collaborative problem-solving approaches."
+  },
+  {
+    "id": 48,
+    "platform": "Facebook Groups",
+    "category": "Moderation & Conflict Resolution",
+    "tone": "Professional & Formal",
+    "situation": "Conflict or argument between members",
+    "prompt": "Create a professional moderation comment for Facebook Group conflict. Reference group rules, ask members to keep discussions respectful, and offer to discuss privately."
+  },
+  {
+    "id": 49,
+    "platform": "Reddit",
+    "category": "Moderation & Conflict Resolution",
+    "tone": "Authoritative & Direct",
+    "situation": "Conflict or argument between members",
+    "prompt": "Write a direct moderation comment for Reddit addressing rule violations. Cite specific rules broken, explain consequences, and link to community guidelines."
+  },
+  {
+    "id": 50,
+    "platform": "Twitter/X",
+    "category": "Moderation & Conflict Resolution",
+    "tone": "Professional & Formal",
+    "situation": "Conflict or argument between members",
+    "prompt": "Draft a professional moderation reply for Twitter/X conflict. Keep it brief, reference community standards, and offer to discuss privately via DM."
+  },
+  {
+    "id": 51,
+    "platform": "Discord",
+    "category": "Content Creation & Posting",
+    "tone": "Professional & Formal",
+    "situation": "Weekly/Monthly check-in routine",
+    "prompt": "Generate a professional weekly check-in message for Discord. Recap the week's highlights, announce upcoming events, and encourage members to share their wins."
+  },
+  {
+    "id": 52,
+    "platform": "Discord",
+    "category": "Content Creation & Posting",
+    "tone": "Friendly & Warm",
+    "situation": "Weekly/Monthly check-in routine",
+    "prompt": "Write a warm weekly check-in message for Discord. Use a conversational tone, share fun moments from the week, and ask members how they're doing."
+  },
+  {
+    "id": 53,
+    "platform": "Discord",
+    "category": "Content Creation & Posting",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "Weekly/Monthly check-in routine",
+    "prompt": "Create an energetic weekly check-in message for Discord. Highlight member achievements, tease upcoming events, and pump up excitement for the week ahead."
+  },
+  {
+    "id": 54,
+    "platform": "Slack",
+    "category": "Content Creation & Posting",
+    "tone": "Professional & Formal",
+    "situation": "Weekly/Monthly check-in routine",
+    "prompt": "Draft a professional weekly check-in message for Slack. Include team updates, upcoming deadlines, and recognition of team members' contributions."
+  },
+  {
+    "id": 55,
+    "platform": "Slack",
+    "category": "Content Creation & Posting",
+    "tone": "Friendly & Warm",
+    "situation": "Weekly/Monthly check-in routine",
+    "prompt": "Write a warm weekly check-in message for Slack. Share team wins, celebrate milestones, and create space for casual connection and team bonding."
+  },
+  {
+    "id": 56,
+    "platform": "Facebook Groups",
+    "category": "Content Creation & Posting",
+    "tone": "Professional & Formal",
+    "situation": "Weekly/Monthly check-in routine",
+    "prompt": "Create a professional weekly check-in post for Facebook Groups. Summarize group activity, highlight top discussions, and preview what's coming next week."
+  },
+  {
+    "id": 57,
+    "platform": "LinkedIn Communities",
+    "category": "Content Creation & Posting",
+    "tone": "Professional & Formal",
+    "situation": "Weekly/Monthly check-in routine",
+    "prompt": "Draft a professional weekly check-in post for LinkedIn Communities. Share industry insights, celebrate member achievements, and encourage professional discussions."
+  },
+  {
+    "id": 58,
+    "platform": "Reddit",
+    "category": "Content Creation & Posting",
+    "tone": "Professional & Formal",
+    "situation": "Weekly/Monthly check-in routine",
+    "prompt": "Write a professional weekly check-in post for Reddit. Recap top discussions, highlight quality content, and set expectations for the coming week."
+  },
+  {
+    "id": 59,
+    "platform": "Twitter/X",
+    "category": "Content Creation & Posting",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "Weekly/Monthly check-in routine",
+    "prompt": "Create an energetic weekly check-in thread for Twitter/X. Highlight community wins, share trending topics, and encourage members to share their updates."
+  },
+  {
+    "id": 60,
+    "platform": "Telegram",
+    "category": "Content Creation & Posting",
+    "tone": "Friendly & Warm",
+    "situation": "Weekly/Monthly check-in routine",
+    "prompt": "Write a warm weekly check-in message for Telegram. Share group highlights, celebrate active members, and encourage everyone to participate more."
+  },
+  {
+    "id": 61,
+    "platform": "Discord",
+    "category": "Member Recognition & Rewards",
+    "tone": "Professional & Formal",
+    "situation": "Member leaving or churning",
+    "prompt": "Generate a professional farewell message for a Discord member who's leaving. Thank them for their contributions, highlight their impact, and leave the door open for return."
+  },
+  {
+    "id": 62,
+    "platform": "Discord",
+    "category": "Member Recognition & Rewards",
+    "tone": "Empathetic & Supportive",
+    "situation": "Member leaving or churning",
+    "prompt": "Write an empathetic farewell message for a Discord member. Acknowledge their reasons for leaving, express gratitude, and wish them well on their journey."
+  },
+  {
+    "id": 63,
+    "platform": "Discord",
+    "category": "Member Recognition & Rewards",
+    "tone": "Warm & Friendly",
+    "situation": "Member leaving or churning",
+    "prompt": "Create a warm farewell message for Discord. Share a favorite memory or contribution they made, thank them sincerely, and express hope they'll return someday."
+  },
+  {
+    "id": 64,
+    "platform": "Slack",
+    "category": "Member Recognition & Rewards",
+    "tone": "Professional & Formal",
+    "situation": "Member leaving or churning",
+    "prompt": "Draft a professional farewell message for a Slack member who's leaving. Acknowledge their role, thank them for their work, and offer to stay connected."
+  },
+  {
+    "id": 65,
+    "platform": "Slack",
+    "category": "Member Recognition & Rewards",
+    "tone": "Warm & Friendly",
+    "situation": "Member leaving or churning",
+    "prompt": "Write a warm farewell message for Slack. Share appreciation for their collaboration, celebrate their wins, and express genuine sadness at their departure."
+  },
+  {
+    "id": 66,
+    "platform": "Facebook Groups",
+    "category": "Member Recognition & Rewards",
+    "tone": "Professional & Formal",
+    "situation": "Member leaving or churning",
+    "prompt": "Create a professional farewell post for a Facebook Group member. Thank them for their participation, highlight their contributions, and wish them well."
+  },
+  {
+    "id": 67,
+    "platform": "LinkedIn Communities",
+    "category": "Member Recognition & Rewards",
+    "tone": "Professional & Formal",
+    "situation": "Member leaving or churning",
+    "prompt": "Write a professional farewell message for a LinkedIn Community member. Acknowledge their professional growth, thank them for their insights, and maintain the connection."
+  },
+  {
+    "id": 68,
+    "platform": "Reddit",
+    "category": "Member Recognition & Rewards",
+    "tone": "Friendly & Warm",
+    "situation": "Member leaving or churning",
+    "prompt": "Draft a warm farewell post for a Reddit member. Thank them for their posts and comments, celebrate their contributions, and leave a positive final impression."
+  },
+  {
+    "id": 69,
+    "platform": "Twitter/X",
+    "category": "Member Recognition & Rewards",
+    "tone": "Professional & Formal",
+    "situation": "Member leaving or churning",
+    "prompt": "Create a professional farewell tweet for a community member. Keep it brief, thank them for their engagement, and wish them success."
+  },
+  {
+    "id": 70,
+    "platform": "Telegram",
+    "category": "Member Recognition & Rewards",
+    "tone": "Warm & Friendly",
+    "situation": "Member leaving or churning",
+    "prompt": "Write a warm farewell message for a Telegram group member. Express appreciation for their presence, share a positive memory, and leave them feeling valued."
+  },
+  {
+    "id": 71,
+    "platform": "Discord",
+    "category": "Re-engagement & Win-back",
+    "tone": "Professional & Formal",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Generate a professional re-engagement message for an inactive Discord member. Highlight new features or content they've missed and provide a clear reason to return."
+  },
+  {
+    "id": 72,
+    "platform": "Discord",
+    "category": "Re-engagement & Win-back",
+    "tone": "Friendly & Warm",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Write a warm re-engagement message for an inactive Discord member. Let them know they're missed, share exciting updates, and make it easy to jump back in."
+  },
+  {
+    "id": 73,
+    "platform": "Discord",
+    "category": "Re-engagement & Win-back",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Create an energetic re-engagement message for Discord. Highlight recent wins, trending discussions, and opportunities they don't want to miss out on."
+  },
+  {
+    "id": 74,
+    "platform": "Slack",
+    "category": "Re-engagement & Win-back",
+    "tone": "Professional & Formal",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Draft a professional re-engagement message for an inactive Slack member. Remind them of their value to the team and highlight key updates they should catch up on."
+  },
+  {
+    "id": 75,
+    "platform": "Slack",
+    "category": "Re-engagement & Win-back",
+    "tone": "Friendly & Warm",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Write a warm re-engagement message for Slack. Acknowledge their absence, share what's new, and express that the team wants them back."
+  },
+  {
+    "id": 76,
+    "platform": "Facebook Groups",
+    "category": "Re-engagement & Win-back",
+    "tone": "Professional & Formal",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Create a professional re-engagement post for Facebook Groups. Remind members of the group's value and highlight discussions they might find interesting."
+  },
+  {
+    "id": 77,
+    "platform": "LinkedIn Communities",
+    "category": "Re-engagement & Win-back",
+    "tone": "Professional & Formal",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Write a professional re-engagement message for LinkedIn Communities. Highlight valuable discussions and networking opportunities they've missed."
+  },
+  {
+    "id": 78,
+    "platform": "Reddit",
+    "category": "Re-engagement & Win-back",
+    "tone": "Friendly & Warm",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Draft a warm re-engagement message for Reddit. Share recent highlights, trending threads, and encourage them to jump back into discussions."
+  },
+  {
+    "id": 79,
+    "platform": "Twitter/X",
+    "category": "Re-engagement & Win-back",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Create an energetic re-engagement tweet for inactive community members. Highlight trending conversations and exciting updates they've missed."
+  },
+  {
+    "id": 80,
+    "platform": "Telegram",
+    "category": "Re-engagement & Win-back",
+    "tone": "Friendly & Warm",
+    "situation": "Inactive member hasn't engaged in 30+ days",
+    "prompt": "Write a warm re-engagement message for Telegram. Remind them of the group's value, share recent highlights, and make them feel welcomed back."
+  },
+  {
+    "id": 81,
+    "platform": "Discord",
+    "category": "Events & Announcements",
+    "tone": "Professional & Formal",
+    "situation": "Major product/service launch",
+    "prompt": "Generate a professional announcement for a major product launch in Discord. Include launch date, key features, and how members can get early access or provide feedback."
+  },
+  {
+    "id": 82,
+    "platform": "Discord",
+    "category": "Events & Announcements",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "Major product/service launch",
+    "prompt": "Write an energetic announcement for a major product launch in Discord. Build excitement, highlight transformative features, and create urgency around the launch."
+  },
+  {
+    "id": 83,
+    "platform": "Discord",
+    "category": "Events & Announcements",
+    "tone": "Inspirational & Motivational",
+    "situation": "Major product/service launch",
+    "prompt": "Create an inspirational announcement for a product launch in Discord. Connect the launch to community impact, share the vision, and motivate members to be part of it."
+  },
+  {
+    "id": 84,
+    "platform": "Slack",
+    "category": "Events & Announcements",
+    "tone": "Professional & Formal",
+    "situation": "Major product/service launch",
+    "prompt": "Draft a professional announcement for a major product launch in Slack. Include launch details, team contributions, and next steps for the organization."
+  },
+  {
+    "id": 85,
+    "platform": "Slack",
+    "category": "Events & Announcements",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "Major product/service launch",
+    "prompt": "Write an energetic announcement for a product launch in Slack. Celebrate the team's hard work, highlight key features, and share the excitement."
+  },
+  {
+    "id": 86,
+    "platform": "Facebook Groups",
+    "category": "Events & Announcements",
+    "tone": "Professional & Formal",
+    "situation": "Major product/service launch",
+    "prompt": "Create a professional announcement post for a major launch in Facebook Groups. Include details, benefits, and a clear call-to-action for members."
+  },
+  {
+    "id": 87,
+    "platform": "LinkedIn Communities",
+    "category": "Events & Announcements",
+    "tone": "Professional & Formal",
+    "situation": "Major product/service launch",
+    "prompt": "Write a professional announcement for a product launch in LinkedIn Communities. Emphasize industry impact, innovation, and professional value."
+  },
+  {
+    "id": 88,
+    "platform": "Reddit",
+    "category": "Events & Announcements",
+    "tone": "Professional & Formal",
+    "situation": "Major product/service launch",
+    "prompt": "Draft a professional announcement post for a major launch on Reddit. Include launch details, answer anticipated questions, and invite feedback."
+  },
+  {
+    "id": 89,
+    "platform": "Twitter/X",
+    "category": "Events & Announcements",
+    "tone": "Enthusiastic & Energetic",
+    "situation": "Major product/service launch",
+    "prompt": "Create an energetic announcement thread for a product launch on Twitter/X. Build hype, share key features, and encourage shares and retweets."
+  },
+  {
+    "id": 90,
+    "platform": "Telegram",
+    "category": "Events & Announcements",
+    "tone": "Professional & Formal",
+    "situation": "Major product/service launch",
+    "prompt": "Write a professional announcement for a product launch in Telegram. Include launch details, benefits, and how members can participate or learn more."
+  },
+  {
+    "id": 91,
+    "platform": "Discord",
+    "category": "Feedback & Surveys",
+    "tone": "Professional & Formal",
+    "situation": "Negative feedback or complaint",
+    "prompt": "Generate a professional response to negative feedback in Discord. Acknowledge the concern, apologize if appropriate, and outline steps to address the issue."
+  },
+  {
+    "id": 92,
+    "platform": "Discord",
+    "category": "Feedback & Surveys",
+    "tone": "Empathetic & Supportive",
+    "situation": "Negative feedback or complaint",
+    "prompt": "Write an empathetic response to negative feedback in Discord. Validate their frustration, show genuine concern, and commit to finding a solution together."
+  },
+  {
+    "id": 93,
+    "platform": "Discord",
+    "category": "Feedback & Surveys",
+    "tone": "Authoritative & Direct",
+    "situation": "Negative feedback or complaint",
+    "prompt": "Create a direct response to negative feedback in Discord. Address the complaint clearly, explain your perspective, and outline the path forward."
+  },
+  {
+    "id": 94,
+    "platform": "Slack",
+    "category": "Feedback & Surveys",
+    "tone": "Professional & Formal",
+    "situation": "Negative feedback or complaint",
+    "prompt": "Draft a professional response to negative feedback in Slack. Thank them for the feedback, acknowledge the concern, and explain how you'll address it."
+  },
+  {
+    "id": 95,
+    "platform": "Slack",
+    "category": "Feedback & Surveys",
+    "tone": "Empathetic & Supportive",
+    "situation": "Negative feedback or complaint",
+    "prompt": "Write an empathetic response to negative feedback in Slack. Show understanding, apologize for the impact, and work toward resolution."
+  },
+  {
+    "id": 96,
+    "platform": "Facebook Groups",
+    "category": "Feedback & Surveys",
+    "tone": "Professional & Formal",
+    "situation": "Negative feedback or complaint",
+    "prompt": "Create a professional response to negative feedback in Facebook Groups. Acknowledge the concern, take responsibility, and outline corrective actions."
+  },
+  {
+    "id": 97,
+    "platform": "LinkedIn Communities",
+    "category": "Feedback & Surveys",
+    "tone": "Professional & Formal",
+    "situation": "Negative feedback or complaint",
+    "prompt": "Write a professional response to negative feedback in LinkedIn Communities. Address the concern thoughtfully, maintain professionalism, and offer to discuss further."
+  },
+  {
+    "id": 98,
+    "platform": "Reddit",
+    "category": "Feedback & Surveys",
+    "tone": "Professional & Formal",
+    "situation": "Negative feedback or complaint",
+    "prompt": "Draft a professional response to negative feedback on Reddit. Acknowledge the criticism, explain your position, and invite further discussion."
+  },
+  {
+    "id": 99,
+    "platform": "Twitter/X",
+    "category": "Feedback & Surveys",
+    "tone": "Professional & Formal",
+    "situation": "Negative feedback or complaint",
+    "prompt": "Create a professional response to negative feedback on Twitter/X. Keep it brief, acknowledge the concern, and offer to discuss privately via DM."
+  },
+  {
+    "id": 100,
+    "platform": "Telegram",
+    "category": "Feedback & Surveys",
+    "tone": "Empathetic & Supportive",
+    "situation": "Negative feedback or complaint",
+    "prompt": "Write an empathetic response to negative feedback in Telegram. Show genuine concern, apologize if needed, and work toward a positive resolution."
+  }
+]
