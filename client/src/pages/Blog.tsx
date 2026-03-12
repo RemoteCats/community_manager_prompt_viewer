@@ -105,7 +105,7 @@ export default function Blog() {
     return (
       <div className="min-h-screen bg-background">
         <div className="flex items-center justify-center h-96">
-          <p className="text-foreground">Loading blog posts...</p>
+          <p className="text-white">Loading blog posts...</p>
         </div>
       </div>
     );
@@ -116,8 +116,8 @@ export default function Blog() {
       <div className="min-h-screen bg-background">
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
-            <p className="text-destructive font-semibold mb-2">Error loading blog posts</p>
-            <p className="text-foreground text-sm">{error}</p>
+            <p className="text-red-400 font-semibold mb-2">Error loading blog posts</p>
+            <p className="text-white text-sm">{error}</p>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header with Logo */}
-      <div className="bg-white border-b border-border">
+      <div className="bg-black border-b border-border">
         <div className="container py-8">
           <div className="flex items-center gap-4 mb-6">
             <img 
@@ -136,11 +136,11 @@ export default function Blog() {
               className="h-16 w-auto"
             />
           </div>
-          <h1 className="text-4xl font-bold text-foreground mb-2">
+          <h1 className="text-4xl font-bold text-white mb-2">
             AI Community Management Blog
           </h1>
-          <p className="text-lg text-foreground max-w-2xl">
-            {posts.length}+ SEO-optimized articles on community management, engagement strategies,
+          <p className="text-lg text-white max-w-2xl">
+            {posts.length}+ articles on community management, engagement strategies,
             and best practices for all platforms.
           </p>
         </div>
@@ -159,16 +159,16 @@ export default function Blog() {
         {/* Main Content */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Search */}
-          <div className="bg-white border-b border-border sticky top-0 z-40">
+          <div className="bg-black border-b border-border sticky top-0 z-40">
             <div className="container py-6">
               <div className="relative">
-                <Search className="absolute left-3 top-3 w-5 h-5 text-foreground" />
+                <Search className="absolute left-3 top-3 w-5 h-5 text-white" />
                 <Input
                   type="text"
                   placeholder="Search articles by title, topic, or keyword..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 py-2 h-10 text-foreground bg-white border-border"
+                  className="pl-10 py-2 h-10 text-white bg-gray-900 border-border placeholder:text-gray-400"
                 />
               </div>
             </div>
@@ -180,22 +180,22 @@ export default function Blog() {
               {/* Featured Posts */}
               {!selectedCategory && !searchQuery && featuredPosts.length > 0 && (
                 <div className="mb-16">
-                  <h2 className="text-2xl font-bold text-foreground mb-6">Featured Articles</h2>
+                  <h2 className="text-2xl font-bold text-white mb-6">Featured Articles</h2>
                   <div className="grid md:grid-cols-3 gap-6 mb-12">
                     {featuredPosts.map((post) => (
                       <Card
                         key={post.id}
-                        className="p-6 border border-border bg-white hover:shadow-lg transition-shadow cursor-pointer group"
+                        className="p-6 border border-border bg-gray-900 hover:shadow-lg transition-shadow cursor-pointer group"
                         onClick={() => setSelectedPost(post)}
                       >
                         <Badge className="mb-3 bg-primary text-white">Featured</Badge>
-                        <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">
                           {post.title}
                         </h3>
-                        <p className="text-sm text-foreground mb-4 line-clamp-2">
+                        <p className="text-sm text-gray-300 mb-4 line-clamp-2">
                           {post.excerpt}
                         </p>
-                        <div className="flex items-center gap-4 text-xs text-foreground">
+                        <div className="flex items-center gap-4 text-xs text-gray-300">
                           <div className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
                             {post.readTime} min
@@ -213,7 +213,7 @@ export default function Blog() {
 
               {/* Results Count */}
               <div className="mb-6">
-                <p className="text-sm text-foreground">
+                <p className="text-sm text-white">
                   Showing <span className="font-semibold">{filteredPosts.length}</span> of{' '}
                   <span className="font-semibold">{posts.length}</span> articles
                   {selectedCategory && ` in ${selectedCategory}`}
@@ -222,9 +222,9 @@ export default function Blog() {
 
               {/* Blog Posts Grid */}
               {filteredPosts.length === 0 ? (
-                <Card className="p-12 text-center border border-border bg-white">
-                  <p className="text-lg font-semibold text-foreground mb-2">No articles found</p>
-                  <p className="text-foreground">
+                <Card className="p-12 text-center border border-border bg-gray-900">
+                  <p className="text-lg font-semibold text-white mb-2">No articles found</p>
+                  <p className="text-white">
                     Try adjusting your search or browse by category
                   </p>
                 </Card>
@@ -233,28 +233,28 @@ export default function Blog() {
                   {filteredPosts.map((post) => (
                     <Card
                       key={post.id}
-                      className="p-6 border border-border bg-white hover:shadow-md transition-shadow cursor-pointer group"
+                      className="p-6 border border-border bg-gray-900 hover:shadow-md transition-shadow cursor-pointer group"
                       onClick={() => setSelectedPost(post)}
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex gap-2 mb-3">
-                            <Badge variant="secondary" className="bg-secondary text-foreground">{post.category}</Badge>
+                            <Badge variant="secondary" className="bg-gray-800 text-white">{post.category}</Badge>
                             {post.featured && <Badge className="bg-primary text-white">Featured</Badge>}
                           </div>
-                          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
                             {post.title}
                           </h3>
-                          <p className="text-foreground mb-4">{post.excerpt}</p>
+                          <p className="text-gray-300 mb-4">{post.excerpt}</p>
                           <div className="flex flex-wrap gap-2 mb-4">
                             {post.keywords.slice(0, 3).map((keyword) => (
-                              <Badge key={keyword} variant="outline" className="text-xs text-foreground border-foreground">
+                              <Badge key={keyword} variant="outline" className="text-xs text-white border-gray-600">
                                 <Tag className="w-3 h-3 mr-1" />
                                 {keyword}
                               </Badge>
                             ))}
                           </div>
-                          <div className="flex items-center gap-6 text-sm text-foreground">
+                          <div className="flex items-center gap-6 text-sm text-gray-300">
                             <div className="flex items-center gap-2">
                               <Clock className="w-4 h-4" />
                               {post.readTime} min read
@@ -266,7 +266,7 @@ export default function Blog() {
                             <div>By {post.author}</div>
                           </div>
                         </div>
-                        <Button variant="ghost" size="sm" className="flex-shrink-0 text-foreground hover:text-primary">
+                        <Button variant="ghost" size="sm" className="flex-shrink-0 text-white hover:text-primary">
                           <ArrowRight className="w-4 h-4" />
                         </Button>
                       </div>
@@ -279,25 +279,32 @@ export default function Blog() {
         </div>
       </div>
 
-      {/* Post Detail Modal */}
+      {/* Post Detail Modal - Fixed */}
       {selectedPost && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="w-full max-w-3xl my-8 bg-white rounded-lg border border-border relative">
-            {/* Large, Visible Close Button */}
+        <div 
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedPost(null)}
+        >
+          <div 
+            className="w-full max-w-2xl max-h-[85vh] bg-black rounded-lg border border-border overflow-hidden flex flex-col relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button - Large and Visible */}
             <button
               onClick={() => setSelectedPost(null)}
-              className="absolute -top-4 -right-4 bg-primary hover:bg-primary/90 text-white rounded-full p-3 z-50 transition-all shadow-lg hover:shadow-xl"
+              className="absolute top-4 right-4 bg-primary hover:bg-primary/90 text-white rounded-full p-2 z-50 transition-all"
               aria-label="Close"
-              title="Close (Esc)"
+              title="Close"
             >
-              <X className="w-8 h-8" />
+              <X className="w-6 h-6" />
             </button>
 
-            <div className="p-8">
+            {/* Scrollable Content */}
+            <div className="overflow-y-auto flex-1 p-8">
               <Badge className="mb-3 bg-primary text-white">{selectedPost.category}</Badge>
-              <h2 className="text-3xl font-bold text-foreground mb-4 pr-8">{selectedPost.title}</h2>
+              <h2 className="text-3xl font-bold text-white mb-4 pr-12">{selectedPost.title}</h2>
 
-              <div className="flex items-center gap-6 text-sm text-foreground mb-6 pb-6 border-b border-border">
+              <div className="flex items-center gap-6 text-sm text-gray-300 mb-6 pb-6 border-b border-border">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                   {selectedPost.readTime} min read
@@ -309,25 +316,25 @@ export default function Blog() {
                 <div>By {selectedPost.author}</div>
               </div>
 
-              <div className="space-y-4 text-foreground">
+              <div className="space-y-4 text-white">
                 {selectedPost.content.split('\n\n').map((paragraph, i) => {
                   if (paragraph.startsWith('# ')) {
                     return (
-                      <h1 key={i} className="text-2xl font-bold mt-4 mb-2 text-foreground">
+                      <h1 key={i} className="text-2xl font-bold mt-4 mb-2 text-white">
                         {paragraph.replace('# ', '')}
                       </h1>
                     );
                   }
                   if (paragraph.startsWith('## ')) {
                     return (
-                      <h2 key={i} className="text-xl font-bold mt-3 mb-2 text-foreground">
+                      <h2 key={i} className="text-xl font-bold mt-3 mb-2 text-white">
                         {paragraph.replace('## ', '')}
                       </h2>
                     );
                   }
                   if (paragraph.startsWith('### ')) {
                     return (
-                      <h3 key={i} className="text-lg font-bold mt-2 mb-1 text-foreground">
+                      <h3 key={i} className="text-lg font-bold mt-2 mb-1 text-white">
                         {paragraph.replace('### ', '')}
                       </h3>
                     );
@@ -336,7 +343,7 @@ export default function Blog() {
                     return (
                       <ul key={i} className="list-disc list-inside space-y-1">
                         {paragraph.split('\n').map((item, j) => (
-                          <li key={j} className="text-sm text-foreground">
+                          <li key={j} className="text-sm text-gray-300">
                             {item.replace('- ', '')}
                           </li>
                         ))}
@@ -344,7 +351,7 @@ export default function Blog() {
                     );
                   }
                   return (
-                    <p key={i} className="text-sm leading-relaxed text-foreground">
+                    <p key={i} className="text-sm leading-relaxed text-gray-300">
                       {paragraph}
                     </p>
                   );
@@ -354,7 +361,7 @@ export default function Blog() {
               <div className="mt-8 pt-6 border-t border-border">
                 <div className="flex flex-wrap gap-2">
                   {selectedPost.keywords.map((keyword) => (
-                    <Badge key={keyword} variant="outline" className="text-foreground border-foreground">
+                    <Badge key={keyword} variant="outline" className="text-white border-gray-600">
                       {keyword}
                     </Badge>
                   ))}
@@ -366,7 +373,7 @@ export default function Blog() {
       )}
 
       {/* Footer */}
-      <div className="bg-foreground text-background py-4 text-center text-sm border-t border-border">
+      <div className="bg-black text-white py-4 text-center text-sm border-t border-border">
         Made by <span className="font-semibold">Spark Collective</span> ✨
       </div>
     </div>
