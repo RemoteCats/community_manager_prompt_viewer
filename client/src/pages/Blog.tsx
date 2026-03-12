@@ -272,10 +272,11 @@ export default function Blog() {
             {/* Close Button */}
             <button
               onClick={() => setSelectedPost(null)}
-              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground p-2 z-10 hover:bg-secondary rounded-lg transition-colors"
+              className="absolute top-6 right-6 text-foreground hover:text-primary bg-white hover:bg-secondary p-2 z-50 rounded-lg transition-all border border-border hover:border-primary"
               aria-label="Close"
+              title="Close (Esc)"
             >
-              <X className="w-6 h-6" />
+              <X className="w-7 h-7" />
             </button>
 
             <div className="p-8">
