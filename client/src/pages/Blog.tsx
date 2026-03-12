@@ -26,17 +26,33 @@ export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Load blog posts
   useEffect(() => {
     const loadPosts = async () => {
       try {
+        console.log('Loading blog posts from /blog_posts_1000.json');
         const response = await fetch('/blog_posts_1000.json');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
+        console.log('Blog posts loaded:', data.length, 'posts');
+        
+        if (!Array.isArray(data)) {
+          throw new Error('Blog posts data is not an array');
+        }
+        
         setPosts(data);
-        setLoading(false);
+        setError(null);
       } catch (error) {
-        console.error('Error loading blog posts:', error);
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        console.error('Error loading blog posts:', errorMessage);
+        setError(errorMessage);
+      } finally {
         setLoading(false);
       }
     };
@@ -76,6 +92,19 @@ export default function Blog() {
       <div className="min-h-screen bg-background">
         <div className="flex items-center justify-center h-96">
           <p className="text-muted-foreground">Loading blog posts...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <p className="text-destructive font-semibold mb-2">Error loading blog posts</p>
+            <p className="text-muted-foreground text-sm">{error}</p>
+          </div>
         </div>
       </div>
     );
