@@ -109,13 +109,20 @@ export default function Home() {
         <div className="container py-6">
           <div className="flex flex-col gap-4">
             <div className="flex items-start justify-between">
-              <div>
-                <h1 className="text-4xl font-bold tracking-tight text-foreground">
-                  AI Community Manager OS
-                </h1>
-                <p className="text-sm text-muted-foreground mt-2">
-                  10,000 AI-Ready Prompts for Every Platform, Tone & Situation
-                </p>
+              <div className="flex items-start gap-4">
+                <img 
+                  src="/spark-collective-logo.png" 
+                  alt="Spark Collective" 
+                  className="h-16 w-auto"
+                />
+                <div>
+                  <h1 className="text-4xl font-bold tracking-tight text-foreground">
+                    AI Community Manager OS
+                  </h1>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    10,000 AI-Ready Prompts for Every Platform, Tone & Situation
+                  </p>
+                </div>
               </div>
               <div className="text-right">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
