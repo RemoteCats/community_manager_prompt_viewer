@@ -112,10 +112,17 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
+      {/* Header with Logo */}
       <div className="bg-white border-b border-border">
-        <div className="container py-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
+        <div className="container py-8">
+          <div className="flex items-center gap-4 mb-6">
+            <img 
+              src="/spark-collective-logo.png" 
+              alt="Spark Collective" 
+              className="h-16 w-auto"
+            />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground mb-2">
             AI Community Management Blog
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
@@ -147,7 +154,7 @@ export default function Blog() {
                   placeholder="Search articles by title, topic, or keyword..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 py-2 h-10"
+                  className="pl-10 py-2 h-10 text-foreground placeholder:text-muted-foreground"
                 />
               </div>
             </div>
@@ -167,7 +174,7 @@ export default function Blog() {
                         className="p-6 border border-border bg-white hover:shadow-lg transition-shadow cursor-pointer group"
                         onClick={() => setSelectedPost(post)}
                       >
-                        <Badge className="mb-3">Featured</Badge>
+                        <Badge className="mb-3 bg-primary text-primary-foreground">Featured</Badge>
                         <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                           {post.title}
                         </h3>
@@ -193,8 +200,8 @@ export default function Blog() {
               {/* Results Count */}
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground">
-                  Showing <span className="font-semibold">{filteredPosts.length}</span> of{' '}
-                  <span className="font-semibold">{posts.length}</span> articles
+                  Showing <span className="font-semibold text-foreground">{filteredPosts.length}</span> of{' '}
+                  <span className="font-semibold text-foreground">{posts.length}</span> articles
                   {selectedCategory && ` in ${selectedCategory}`}
                 </p>
               </div>
@@ -218,8 +225,8 @@ export default function Blog() {
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex gap-2 mb-3">
-                            <Badge variant="secondary">{post.category}</Badge>
-                            {post.featured && <Badge>Featured</Badge>}
+                            <Badge variant="secondary" className="bg-secondary text-secondary-foreground">{post.category}</Badge>
+                            {post.featured && <Badge className="bg-primary text-primary-foreground">Featured</Badge>}
                           </div>
                           <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                             {post.title}
@@ -227,7 +234,7 @@ export default function Blog() {
                           <p className="text-muted-foreground mb-4">{post.excerpt}</p>
                           <div className="flex flex-wrap gap-2 mb-4">
                             {post.keywords.slice(0, 3).map((keyword) => (
-                              <Badge key={keyword} variant="outline" className="text-xs">
+                              <Badge key={keyword} variant="outline" className="text-xs text-foreground border-border">
                                 <Tag className="w-3 h-3 mr-1" />
                                 {keyword}
                               </Badge>
@@ -245,7 +252,7 @@ export default function Blog() {
                             <div>By {post.author}</div>
                           </div>
                         </div>
-                        <Button variant="ghost" size="sm" className="flex-shrink-0">
+                        <Button variant="ghost" size="sm" className="flex-shrink-0 text-foreground hover:text-primary">
                           <ArrowRight className="w-4 h-4" />
                         </Button>
                       </div>
@@ -260,18 +267,20 @@ export default function Blog() {
 
       {/* Post Detail Modal */}
       {selectedPost && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <Card className="w-full max-w-3xl max-h-[90vh] overflow-y-auto border border-border bg-white">
-            <div className="p-8">
-              <button
-                onClick={() => setSelectedPost(null)}
-                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground p-2"
-              >
-                <X className="w-5 h-5" />
-              </button>
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <Card className="w-full max-w-3xl my-8 border border-border bg-white relative">
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedPost(null)}
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground p-2 z-10 hover:bg-secondary rounded-lg transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-6 h-6" />
+            </button>
 
-              <Badge className="mb-3">{selectedPost.category}</Badge>
-              <h2 className="text-3xl font-bold text-foreground mb-4">{selectedPost.title}</h2>
+            <div className="p-8">
+              <Badge className="mb-3 bg-primary text-primary-foreground">{selectedPost.category}</Badge>
+              <h2 className="text-3xl font-bold text-foreground mb-4 pr-8">{selectedPost.title}</h2>
 
               <div className="flex items-center gap-6 text-sm text-muted-foreground mb-6 pb-6 border-b border-border">
                 <div className="flex items-center gap-2">
@@ -289,21 +298,21 @@ export default function Blog() {
                 {selectedPost.content.split('\n\n').map((paragraph, i) => {
                   if (paragraph.startsWith('# ')) {
                     return (
-                      <h1 key={i} className="text-2xl font-bold mt-4 mb-2">
+                      <h1 key={i} className="text-2xl font-bold mt-4 mb-2 text-foreground">
                         {paragraph.replace('# ', '')}
                       </h1>
                     );
                   }
                   if (paragraph.startsWith('## ')) {
                     return (
-                      <h2 key={i} className="text-xl font-bold mt-3 mb-2">
+                      <h2 key={i} className="text-xl font-bold mt-3 mb-2 text-foreground">
                         {paragraph.replace('## ', '')}
                       </h2>
                     );
                   }
                   if (paragraph.startsWith('### ')) {
                     return (
-                      <h3 key={i} className="text-lg font-bold mt-2 mb-1">
+                      <h3 key={i} className="text-lg font-bold mt-2 mb-1 text-foreground">
                         {paragraph.replace('### ', '')}
                       </h3>
                     );
@@ -312,7 +321,7 @@ export default function Blog() {
                     return (
                       <ul key={i} className="list-disc list-inside space-y-1">
                         {paragraph.split('\n').map((item, j) => (
-                          <li key={j} className="text-sm">
+                          <li key={j} className="text-sm text-foreground">
                             {item.replace('- ', '')}
                           </li>
                         ))}
@@ -320,7 +329,7 @@ export default function Blog() {
                     );
                   }
                   return (
-                    <p key={i} className="text-sm leading-relaxed">
+                    <p key={i} className="text-sm leading-relaxed text-foreground">
                       {paragraph}
                     </p>
                   );
@@ -330,7 +339,7 @@ export default function Blog() {
               <div className="mt-8 pt-6 border-t border-border">
                 <div className="flex flex-wrap gap-2">
                   {selectedPost.keywords.map((keyword) => (
-                    <Badge key={keyword} variant="outline">
+                    <Badge key={keyword} variant="outline" className="text-foreground border-border">
                       {keyword}
                     </Badge>
                   ))}
