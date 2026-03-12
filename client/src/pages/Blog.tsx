@@ -60,6 +60,20 @@ export default function Blog() {
     loadPosts();
   }, []);
 
+  // Handle Escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedPost(null);
+      }
+    };
+    
+    if (selectedPost) {
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
+    }
+  }, [selectedPost]);
+
   // Filter posts
   const filteredPosts = useMemo(() => {
     let filtered = posts.filter((post) => {
@@ -91,7 +105,7 @@ export default function Blog() {
     return (
       <div className="min-h-screen bg-background">
         <div className="flex items-center justify-center h-96">
-          <p className="text-muted-foreground">Loading blog posts...</p>
+          <p className="text-foreground">Loading blog posts...</p>
         </div>
       </div>
     );
@@ -103,7 +117,7 @@ export default function Blog() {
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <p className="text-destructive font-semibold mb-2">Error loading blog posts</p>
-            <p className="text-muted-foreground text-sm">{error}</p>
+            <p className="text-foreground text-sm">{error}</p>
           </div>
         </div>
       </div>
@@ -125,7 +139,7 @@ export default function Blog() {
           <h1 className="text-4xl font-bold text-foreground mb-2">
             AI Community Management Blog
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl">
+          <p className="text-lg text-foreground max-w-2xl">
             {posts.length}+ SEO-optimized articles on community management, engagement strategies,
             and best practices for all platforms.
           </p>
@@ -148,13 +162,13 @@ export default function Blog() {
           <div className="bg-white border-b border-border sticky top-0 z-40">
             <div className="container py-6">
               <div className="relative">
-                <Search className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                <Search className="absolute left-3 top-3 w-5 h-5 text-foreground" />
                 <Input
                   type="text"
                   placeholder="Search articles by title, topic, or keyword..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 py-2 h-10 text-foreground placeholder:text-muted-foreground"
+                  className="pl-10 py-2 h-10 text-foreground bg-white border-border"
                 />
               </div>
             </div>
@@ -174,14 +188,14 @@ export default function Blog() {
                         className="p-6 border border-border bg-white hover:shadow-lg transition-shadow cursor-pointer group"
                         onClick={() => setSelectedPost(post)}
                       >
-                        <Badge className="mb-3 bg-primary text-primary-foreground">Featured</Badge>
+                        <Badge className="mb-3 bg-primary text-white">Featured</Badge>
                         <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                           {post.title}
                         </h3>
-                        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                        <p className="text-sm text-foreground mb-4 line-clamp-2">
                           {post.excerpt}
                         </p>
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                        <div className="flex items-center gap-4 text-xs text-foreground">
                           <div className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
                             {post.readTime} min
@@ -199,9 +213,9 @@ export default function Blog() {
 
               {/* Results Count */}
               <div className="mb-6">
-                <p className="text-sm text-muted-foreground">
-                  Showing <span className="font-semibold text-foreground">{filteredPosts.length}</span> of{' '}
-                  <span className="font-semibold text-foreground">{posts.length}</span> articles
+                <p className="text-sm text-foreground">
+                  Showing <span className="font-semibold">{filteredPosts.length}</span> of{' '}
+                  <span className="font-semibold">{posts.length}</span> articles
                   {selectedCategory && ` in ${selectedCategory}`}
                 </p>
               </div>
@@ -210,7 +224,7 @@ export default function Blog() {
               {filteredPosts.length === 0 ? (
                 <Card className="p-12 text-center border border-border bg-white">
                   <p className="text-lg font-semibold text-foreground mb-2">No articles found</p>
-                  <p className="text-muted-foreground">
+                  <p className="text-foreground">
                     Try adjusting your search or browse by category
                   </p>
                 </Card>
@@ -225,22 +239,22 @@ export default function Blog() {
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex gap-2 mb-3">
-                            <Badge variant="secondary" className="bg-secondary text-secondary-foreground">{post.category}</Badge>
-                            {post.featured && <Badge className="bg-primary text-primary-foreground">Featured</Badge>}
+                            <Badge variant="secondary" className="bg-secondary text-foreground">{post.category}</Badge>
+                            {post.featured && <Badge className="bg-primary text-white">Featured</Badge>}
                           </div>
                           <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                             {post.title}
                           </h3>
-                          <p className="text-muted-foreground mb-4">{post.excerpt}</p>
+                          <p className="text-foreground mb-4">{post.excerpt}</p>
                           <div className="flex flex-wrap gap-2 mb-4">
                             {post.keywords.slice(0, 3).map((keyword) => (
-                              <Badge key={keyword} variant="outline" className="text-xs text-foreground border-border">
+                              <Badge key={keyword} variant="outline" className="text-xs text-foreground border-foreground">
                                 <Tag className="w-3 h-3 mr-1" />
                                 {keyword}
                               </Badge>
                             ))}
                           </div>
-                          <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-6 text-sm text-foreground">
                             <div className="flex items-center gap-2">
                               <Clock className="w-4 h-4" />
                               {post.readTime} min read
@@ -268,22 +282,22 @@ export default function Blog() {
       {/* Post Detail Modal */}
       {selectedPost && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <Card className="w-full max-w-3xl my-8 border border-border bg-white relative">
-            {/* Close Button */}
+          <div className="w-full max-w-3xl my-8 bg-white rounded-lg border border-border relative">
+            {/* Large, Visible Close Button */}
             <button
               onClick={() => setSelectedPost(null)}
-              className="absolute top-6 right-6 text-foreground hover:text-primary bg-white hover:bg-secondary p-2 z-50 rounded-lg transition-all border border-border hover:border-primary"
+              className="absolute -top-4 -right-4 bg-primary hover:bg-primary/90 text-white rounded-full p-3 z-50 transition-all shadow-lg hover:shadow-xl"
               aria-label="Close"
               title="Close (Esc)"
             >
-              <X className="w-7 h-7" />
+              <X className="w-8 h-8" />
             </button>
 
             <div className="p-8">
-              <Badge className="mb-3 bg-primary text-primary-foreground">{selectedPost.category}</Badge>
+              <Badge className="mb-3 bg-primary text-white">{selectedPost.category}</Badge>
               <h2 className="text-3xl font-bold text-foreground mb-4 pr-8">{selectedPost.title}</h2>
 
-              <div className="flex items-center gap-6 text-sm text-muted-foreground mb-6 pb-6 border-b border-border">
+              <div className="flex items-center gap-6 text-sm text-foreground mb-6 pb-6 border-b border-border">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                   {selectedPost.readTime} min read
@@ -295,7 +309,7 @@ export default function Blog() {
                 <div>By {selectedPost.author}</div>
               </div>
 
-              <div className="prose prose-sm max-w-none text-foreground space-y-4">
+              <div className="space-y-4 text-foreground">
                 {selectedPost.content.split('\n\n').map((paragraph, i) => {
                   if (paragraph.startsWith('# ')) {
                     return (
@@ -340,14 +354,14 @@ export default function Blog() {
               <div className="mt-8 pt-6 border-t border-border">
                 <div className="flex flex-wrap gap-2">
                   {selectedPost.keywords.map((keyword) => (
-                    <Badge key={keyword} variant="outline" className="text-foreground border-border">
+                    <Badge key={keyword} variant="outline" className="text-foreground border-foreground">
                       {keyword}
                     </Badge>
                   ))}
                 </div>
               </div>
             </div>
-          </Card>
+          </div>
         </div>
       )}
 
