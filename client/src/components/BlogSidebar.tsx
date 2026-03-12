@@ -8,12 +8,12 @@ interface BlogPost {
   title: string;
   slug: string;
   excerpt: string;
-  content?: string;
-  author?: string;
-  publishedAt?: string;
+  content: string;
+  author: string;
+  publishedAt: string;
   readTime: number;
   featured: boolean;
-  keywords?: string[];
+  keywords: string[];
 }
 
 interface BlogSidebarProps {
@@ -55,9 +55,9 @@ export default function BlogSidebar({
   };
 
   return (
-    <aside className="w-64 bg-white border-r border-border h-screen overflow-y-auto sticky top-0">
+    <aside className="w-64 bg-white border-r border-border h-screen overflow-y-auto sticky top-0 flex flex-col">
       {/* Header */}
-      <div className="p-6 border-b border-border">
+      <div className="p-6 border-b border-border flex-shrink-0">
         <div className="flex items-center gap-2 mb-2">
           <BookOpen className="w-5 h-5 text-foreground" />
           <h2 className="text-lg font-bold text-foreground">Blog Categories</h2>
@@ -68,7 +68,7 @@ export default function BlogSidebar({
       </div>
 
       {/* Categories */}
-      <nav className="p-4">
+      <nav className="p-4 flex-1 overflow-y-auto">
         {/* All Posts Button */}
         <Button
           variant={selectedCategory === null ? 'default' : 'ghost'}
@@ -144,7 +144,7 @@ export default function BlogSidebar({
       </nav>
 
       {/* Footer Stats */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border bg-muted">
+      <div className="p-4 border-t border-border bg-muted flex-shrink-0">
         <div className="text-xs text-muted-foreground space-y-1">
           <p>
             <span className="font-semibold text-foreground">{categories.length}</span> Categories
