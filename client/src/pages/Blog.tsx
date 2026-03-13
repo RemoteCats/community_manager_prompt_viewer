@@ -175,16 +175,16 @@ export default function Blog() {
         {/* Main Content */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Search */}
-          <div className="bg-black border-b border-border sticky top-0 z-40">
+          <div className="bg-white border-b border-border sticky top-0 z-40">
             <div className="container py-6">
               <div className="relative">
-                <Search className="absolute left-3 top-3 w-5 h-5 text-white" />
+                <Search className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                 <Input
                   type="text"
                   placeholder="Search articles by title, topic, or keyword..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 py-2 h-10 text-white bg-gray-900 border-border placeholder:text-gray-400"
+                  className="pl-10 py-2 h-10 text-foreground bg-background border-border placeholder:text-muted-foreground"
                 />
               </div>
             </div>
@@ -196,22 +196,22 @@ export default function Blog() {
               {/* Featured Posts */}
               {!selectedCategory && !searchQuery && featuredPosts.length > 0 && (
                 <div className="mb-16">
-                  <h2 className="text-2xl font-bold text-white mb-6">Featured Articles</h2>
+                  <h2 className="text-2xl font-bold text-foreground mb-6">Featured Articles</h2>
                   <div className="grid md:grid-cols-3 gap-6 mb-12">
                     {featuredPosts.map((post) => (
                       <Card
                         key={post.id}
-                        className="p-6 border border-border bg-gray-900 hover:shadow-lg transition-shadow cursor-pointer group"
+                        className="p-6 border border-border bg-white hover:shadow-lg transition-shadow cursor-pointer group"
                         onClick={() => setSelectedPost(post)}
                       >
-                        <Badge className="mb-3 bg-primary text-white">Featured</Badge>
-                        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                        <Badge className="mb-3 bg-purple-600 text-white">Featured</Badge>
+                        <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-purple-600 transition-colors">
                           {post.title}
                         </h3>
-                        <p className="text-sm text-gray-300 mb-4 line-clamp-2">
+                        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                           {post.excerpt}
                         </p>
-                        <div className="flex items-center gap-4 text-xs text-gray-300">
+                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
                           <div className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
                             {post.readTime} min
@@ -229,7 +229,7 @@ export default function Blog() {
 
               {/* Results Count */}
               <div className="mb-6">
-                <p className="text-sm text-white">
+                <p className="text-sm text-foreground">
                   Showing <span className="font-semibold">{filteredPosts.length}</span> of{' '}
                   <span className="font-semibold">{posts.length}</span> articles
                   {selectedCategory && ` in ${selectedCategory}`}
@@ -238,9 +238,9 @@ export default function Blog() {
 
               {/* Blog Posts Grid */}
               {filteredPosts.length === 0 ? (
-                <Card className="p-12 text-center border border-border bg-gray-900">
-                  <p className="text-lg font-semibold text-white mb-2">No articles found</p>
-                  <p className="text-white">
+                <Card className="p-12 text-center border border-border bg-white">
+                  <p className="text-lg font-semibold text-foreground mb-2">No articles found</p>
+                  <p className="text-muted-foreground">
                     Try adjusting your search or browse by category
                   </p>
                 </Card>
@@ -249,28 +249,28 @@ export default function Blog() {
                   {filteredPosts.map((post) => (
                     <Card
                       key={post.id}
-                      className="p-6 border border-border bg-gray-900 hover:shadow-md transition-shadow cursor-pointer group"
+                      className="p-6 border border-border bg-white hover:shadow-md transition-shadow cursor-pointer group"
                       onClick={() => setSelectedPost(post)}
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex gap-2 mb-3">
-                            <Badge variant="secondary" className="bg-gray-800 text-white">{post.category}</Badge>
-                            {post.featured && <Badge className="bg-primary text-white">Featured</Badge>}
+                            <Badge variant="secondary" className="bg-purple-600 text-white">{post.category}</Badge>
+                            {post.featured && <Badge className="bg-purple-600 text-white">Featured</Badge>}
                           </div>
-                          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-purple-600 transition-colors">
                             {post.title}
                           </h3>
-                          <p className="text-gray-300 mb-4">{post.excerpt}</p>
+                          <p className="text-muted-foreground mb-4">{post.excerpt}</p>
                           <div className="flex flex-wrap gap-2 mb-4">
                             {post.keywords.slice(0, 3).map((keyword) => (
-                              <Badge key={keyword} variant="outline" className="text-xs text-white border-gray-600">
+                              <Badge key={keyword} variant="outline" className="text-xs text-foreground border-purple-300">
                                 <Tag className="w-3 h-3 mr-1" />
                                 {keyword}
                               </Badge>
                             ))}
                           </div>
-                          <div className="flex items-center gap-6 text-sm text-gray-300">
+                          <div className="flex items-center gap-6 text-sm text-muted-foreground">
                             <div className="flex items-center gap-2">
                               <Clock className="w-4 h-4" />
                               {post.readTime} min read
@@ -282,7 +282,7 @@ export default function Blog() {
                             <div>By {post.author}</div>
                           </div>
                         </div>
-                        <Button variant="ghost" size="sm" className="flex-shrink-0 text-white hover:text-primary">
+                        <Button variant="ghost" size="sm" className="flex-shrink-0 text-foreground hover:text-purple-600">
                           <ArrowRight className="w-4 h-4" />
                         </Button>
                       </div>

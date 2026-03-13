@@ -55,27 +55,27 @@ export default function BlogSidebar({
   };
 
   return (
-    <aside className="w-64 bg-black border-r border-border h-screen overflow-y-auto sticky top-0 flex flex-col">
+    <aside className="w-64 bg-white border-r border-border h-screen overflow-y-auto sticky top-0 flex flex-col">
       {/* Header */}
       <div className="p-6 border-b border-border flex-shrink-0">
-        <p className="text-xs text-white">
+        <p className="text-xs text-foreground">
           {posts.length} articles
         </p>
       </div>
 
       {/* Categories */}
-      <nav className="p-4 flex-1 overflow-y-auto bg-black">
+      <nav className="p-4 flex-1 overflow-y-auto bg-white">
         {/* All Posts Button */}
         <Button
           variant={selectedCategory === null ? 'default' : 'ghost'}
-          className="w-full justify-start mb-4 text-sm text-white bg-gray-900 hover:bg-gray-800"
+          className="w-full justify-start mb-4 text-sm text-foreground bg-purple-100 hover:bg-purple-200"
           onClick={() => {
             onCategorySelect(null);
             setExpandedCategories(new Set());
           }}
         >
           <span className="flex-1 text-left">All Posts</span>
-          <span className="text-xs bg-primary text-white px-2 py-1 rounded">
+          <span className="text-xs bg-purple-600 text-white px-2 py-1 rounded">
             {posts.length}
           </span>
         </Button>
@@ -96,8 +96,8 @@ export default function BlogSidebar({
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     selectedCategory === category
-                      ? 'bg-purple-700 text-white'
-                      : 'text-gray-300 hover:bg-purple-600 hover:text-white'
+                      ? 'bg-purple-600 text-white'
+                      : 'text-foreground hover:bg-purple-100 hover:text-foreground'
                   }`}
                 >
                   <span className="flex-1 text-left">{category}</span>
@@ -120,13 +120,13 @@ export default function BlogSidebar({
                       <button
                         key={post.id}
                         onClick={() => onPostSelect?.(post)}
-                        className="w-full text-left px-2 py-1.5 rounded text-xs text-gray-400 hover:text-white hover:bg-gray-800 transition-colors group"
+                        className="w-full text-left px-2 py-1.5 rounded text-xs text-muted-foreground hover:text-foreground hover:bg-purple-100 transition-colors group"
                         title={post.title}
                       >
-                        <div className="truncate font-medium text-white group-hover:text-primary">
+                        <div className="truncate font-medium text-foreground group-hover:text-purple-600">
                           {post.title}
                         </div>
-                        <div className="text-xs text-gray-500 mt-0.5">
+                        <div className="text-xs text-muted-foreground mt-0.5">
                           {post.readTime} min read
                         </div>
                       </button>
@@ -140,13 +140,13 @@ export default function BlogSidebar({
       </nav>
 
       {/* Footer Stats */}
-      <div className="p-4 border-t border-border bg-gray-900 flex-shrink-0">
-        <div className="text-xs text-gray-400 space-y-1">
+      <div className="p-4 border-t border-border bg-white flex-shrink-0">
+        <div className="text-xs text-muted-foreground space-y-1">
           <p>
-            <span className="font-semibold text-white">{categories.length}</span> Categories
+            <span className="font-semibold text-foreground">{categories.length}</span> Categories
           </p>
           <p>
-            <span className="font-semibold text-white">{posts.length}</span> Total Articles
+            <span className="font-semibold text-foreground">{posts.length}</span> Total Articles
           </p>
           <p className="text-xs">
             Updated daily with new content
