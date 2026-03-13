@@ -151,6 +151,18 @@ export default function Blog() {
             {posts.length}+ articles on community management, engagement strategies,
             and best practices for all platforms.
           </p>
+          
+          <div className="flex gap-2 border-t border-border pt-4 mt-6 -mx-8 px-8">
+            <a href="/" className="px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 rounded transition">
+              Prompts
+            </a>
+            <a href="/blog" className="px-4 py-2 text-sm font-medium text-purple-600 hover:bg-gray-800 rounded transition border-b-2 border-purple-600">
+              Blog
+            </a>
+            <a href="/pricing" className="px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 rounded transition">
+              Pricing
+            </a>
+          </div>
         </div>
       </div>
 

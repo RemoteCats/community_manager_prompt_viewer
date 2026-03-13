@@ -150,6 +150,9 @@ export default function Home() {
                 <BookOpen className="w-4 h-4" />
                 Blog
               </a>
+              <a href="/pricing" className="px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 rounded transition">
+                Pricing
+              </a>
             </div>
 
             {/* Search Bar */}
