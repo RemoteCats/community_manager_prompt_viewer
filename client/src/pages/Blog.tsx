@@ -126,10 +126,10 @@ export default function Blog() {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-black flex flex-col">
+    return (
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Header with Logo */}
-      <div className="bg-black border-b border-border">
+      <div className="bg-white border-b border-border">
         <div className="container py-8">
           <div className="flex items-start justify-between mb-6">
             <button
@@ -144,18 +144,18 @@ export default function Blog() {
               />
             </button>
             <div className="text-right">
-              <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
                 Made by
               </p>
-              <p className="text-sm font-semibold text-white">
+              <p className="text-sm font-semibold text-foreground">
                 Spark Collective
               </p>
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-white mb-2">
+          <h1 className="text-4xl font-bold text-foreground mb-2">
             AI Community Management Blog
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl">
+          <p className="text-lg text-muted-foreground max-w-2xl">
             {posts.length}+ articles on community management, engagement strategies,
             and best practices for all platforms.
           </p>

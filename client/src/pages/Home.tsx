@@ -119,7 +119,7 @@ export default function Home() {
                   <img 
                     src="/spark-collective-logo.png" 
                     alt="Spark Collective" 
-                    className="h-16 w-auto cursor-pointer"
+                    className="h-32 w-auto cursor-pointer"
                   />
                 </button>
                 <div>
