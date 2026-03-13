@@ -127,11 +127,11 @@ export default function Blog() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col">
       {/* Header with Logo */}
       <div className="bg-black border-b border-border">
         <div className="container py-8">
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-start justify-between mb-6">
             <button
               onClick={() => setLocation('/')}
               className="hover:opacity-80 transition-opacity"
@@ -140,14 +140,22 @@ export default function Blog() {
               <img 
                 src="/spark-collective-logo.png" 
                 alt="Spark Collective" 
-                className="h-16 w-auto cursor-pointer"
+                className="h-32 w-auto cursor-pointer"
               />
             </button>
+            <div className="text-right">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">
+                Made by
+              </p>
+              <p className="text-sm font-semibold text-white">
+                Spark Collective
+              </p>
+            </div>
           </div>
           <h1 className="text-4xl font-bold text-white mb-2">
             AI Community Management Blog
           </h1>
-          <p className="text-lg text-white max-w-2xl">
+          <p className="text-lg text-gray-300 max-w-2xl">
             {posts.length}+ articles on community management, engagement strategies,
             and best practices for all platforms.
           </p>

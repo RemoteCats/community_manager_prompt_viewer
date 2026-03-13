@@ -96,13 +96,13 @@ export default function BlogSidebar({
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     selectedCategory === category
-                      ? 'bg-gray-800 text-white'
-                      : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                      ? 'bg-purple-700 text-white'
+                      : 'text-gray-300 hover:bg-purple-600 hover:text-white'
                   }`}
                 >
                   <span className="flex-1 text-left">{category}</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs bg-primary text-white px-2 py-0.5 rounded">
+                    <span className="text-xs bg-purple-600 text-white px-2 py-0.5 rounded">
                       {postCount}
                     </span>
                     {isExpanded ? (
