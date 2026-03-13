@@ -16,6 +16,7 @@ interface Prompt {
 }
 
 export default function Home() {
+  const [, setLocation] = useLocation();
   const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null);
@@ -110,11 +111,17 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <div className="flex items-start justify-between">
               <div className="flex items-start gap-4">
-                <img 
-                  src="/spark-collective-logo.png" 
-                  alt="Spark Collective" 
-                  className="h-16 w-auto"
-                />
+                <button
+                  onClick={() => setLocation('/')}
+                  className="hover:opacity-80 transition-opacity"
+                  title="Go to home"
+                >
+                  <img 
+                    src="/spark-collective-logo.png" 
+                    alt="Spark Collective" 
+                    className="h-16 w-auto cursor-pointer"
+                  />
+                </button>
                 <div>
                   <h1 className="text-4xl font-bold tracking-tight text-foreground">
                     AI Community Manager OS

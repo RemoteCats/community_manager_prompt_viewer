@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'wouter';
 import { Search, ArrowRight, Calendar, Clock, Tag, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
@@ -21,6 +22,7 @@ interface BlogPost {
 }
 
 export default function Blog() {
+  const [, setLocation] = useLocation();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -130,11 +132,17 @@ export default function Blog() {
       <div className="bg-black border-b border-border">
         <div className="container py-8">
           <div className="flex items-center gap-4 mb-6">
-            <img 
-              src="/spark-collective-logo.png" 
-              alt="Spark Collective" 
-              className="h-16 w-auto"
-            />
+            <button
+              onClick={() => setLocation('/')}
+              className="hover:opacity-80 transition-opacity"
+              title="Go to home"
+            >
+              <img 
+                src="/spark-collective-logo.png" 
+                alt="Spark Collective" 
+                className="h-16 w-auto cursor-pointer"
+              />
+            </button>
           </div>
           <h1 className="text-4xl font-bold text-white mb-2">
             AI Community Management Blog
