@@ -104,10 +104,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className="border-b border-border bg-white sticky top-0 z-50 shadow-sm">
-        <div className="container py-6">
+      <header className="border-b border-border bg-black sticky top-0 z-50 shadow-sm">
+        <div className="container py-8">
           <div className="flex flex-col gap-4">
             <div className="flex items-start justify-between">
               <div className="flex items-start gap-4">
@@ -119,23 +119,23 @@ export default function Home() {
                   <img 
                     src="/spark-collective-logo.png" 
                     alt="Spark Collective" 
-                    className="h-16 w-auto cursor-pointer"
+                    className="h-32 w-auto cursor-pointer"
                   />
                 </button>
                 <div>
-                  <h1 className="text-4xl font-bold tracking-tight text-foreground">
+                  <h1 className="text-4xl font-bold tracking-tight text-white">
                     AI Community Manager OS
                   </h1>
-                  <p className="text-sm text-muted-foreground mt-2">
+                  <p className="text-sm text-gray-300 mt-2">
                     10,000 AI-Ready Prompts for Every Platform, Tone & Situation
                   </p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
+                <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">
                   Made by
                 </p>
-                <p className="text-sm font-semibold text-foreground">
+                <p className="text-sm font-semibold text-white">
                   Spark Collective
                 </p>
               </div>
@@ -143,10 +143,10 @@ export default function Home() {
 
             {/* Navigation */}
             <div className="flex gap-2 border-t border-border pt-4 -mx-6 px-6">
-              <a href="/" className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded transition">
+              <a href="/" className="px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 rounded transition">
                 Prompts
               </a>
-              <a href="/blog" className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded transition flex items-center gap-2">
+              <a href="/blog" className="px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 rounded transition flex items-center gap-2">
                 <BookOpen className="w-4 h-4" />
                 Blog
               </a>
@@ -155,18 +155,18 @@ export default function Home() {
             {/* Search Bar */}
             <div className="flex gap-2">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <Input
                   placeholder="Search prompts by keyword, category, or tone..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 bg-muted border-border text-foreground placeholder:text-muted-foreground"
+                  className="pl-10 bg-gray-900 border-border text-white placeholder:text-gray-400"
                 />
               </div>
               <Button
                 onClick={() => setShowFilters(!showFilters)}
                 variant="outline"
-                className="border-border"
+                className="border-border text-white bg-gray-900 hover:bg-gray-800"
               >
                 <Filter className="w-4 h-4 mr-2" />
                 Filters
@@ -174,7 +174,7 @@ export default function Home() {
               <Button
                 onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
                 variant={showFavoritesOnly ? "default" : "outline"}
-                className={showFavoritesOnly ? "bg-foreground text-white" : "border-border"}
+                className={showFavoritesOnly ? "bg-purple-600 text-white hover:bg-purple-700" : "border-border text-white bg-gray-900 hover:bg-gray-800"}
               >
                 <Heart className="w-4 h-4 mr-2" />
                 Favorites {favoritesCount > 0 && `(${favoritesCount})`}
@@ -183,10 +183,10 @@ export default function Home() {
 
             {/* Filters */}
             {showFilters && (
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-3 p-4 bg-muted border border-border rounded">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-3 p-4 bg-gray-900 border border-border rounded">
                 {/* Platform Filter */}
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground block mb-2">
+                  <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 block mb-2">
                     Platform
                   </label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
@@ -194,8 +194,8 @@ export default function Home() {
                       onClick={() => setSelectedPlatform(null)}
                       className={`w-full text-left px-2 py-1 text-sm rounded transition ${
                         selectedPlatform === null
-                          ? "bg-foreground text-white"
-                          : "hover:bg-border text-foreground"
+                          ? "bg-purple-600 text-white"
+                          : "hover:bg-gray-800 text-white"
                       }`}
                     >
                       All Platforms
@@ -206,8 +206,8 @@ export default function Home() {
                         onClick={() => setSelectedPlatform(platform)}
                         className={`w-full text-left px-2 py-1 text-sm rounded transition ${
                           selectedPlatform === platform
-                            ? "bg-foreground text-white"
-                            : "hover:bg-border text-foreground"
+                            ? "bg-purple-600 text-white"
+                            : "hover:bg-gray-800 text-white"
                         }`}
                       >
                         {platform}
@@ -218,7 +218,7 @@ export default function Home() {
 
                 {/* Category Filter */}
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground block mb-2">
+                  <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 block mb-2">
                     Category
                   </label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
@@ -226,8 +226,8 @@ export default function Home() {
                       onClick={() => setSelectedCategory(null)}
                       className={`w-full text-left px-2 py-1 text-sm rounded transition ${
                         selectedCategory === null
-                          ? "bg-foreground text-white"
-                          : "hover:bg-border text-foreground"
+                          ? "bg-purple-600 text-white"
+                          : "hover:bg-gray-800 text-white"
                       }`}
                     >
                       All Categories
@@ -238,8 +238,8 @@ export default function Home() {
                         onClick={() => setSelectedCategory(category)}
                         className={`w-full text-left px-2 py-1 text-sm rounded transition ${
                           selectedCategory === category
-                            ? "bg-foreground text-white"
-                            : "hover:bg-border text-foreground"
+                            ? "bg-purple-600 text-white"
+                            : "hover:bg-gray-800 text-white"
                         }`}
                       >
                         {category}
@@ -250,7 +250,7 @@ export default function Home() {
 
                 {/* Tone Filter */}
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground block mb-2">
+                  <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 block mb-2">
                     Tone
                   </label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
@@ -258,8 +258,8 @@ export default function Home() {
                       onClick={() => setSelectedTone(null)}
                       className={`w-full text-left px-2 py-1 text-sm rounded transition ${
                         selectedTone === null
-                          ? "bg-foreground text-white"
-                          : "hover:bg-border text-foreground"
+                          ? "bg-purple-600 text-white"
+                          : "hover:bg-gray-800 text-white"
                       }`}
                     >
                       All Tones
@@ -270,8 +270,8 @@ export default function Home() {
                         onClick={() => setSelectedTone(tone)}
                         className={`w-full text-left px-2 py-1 text-sm rounded transition ${
                           selectedTone === tone
-                            ? "bg-foreground text-white"
-                            : "hover:bg-border text-foreground"
+                            ? "bg-purple-600 text-white"
+                            : "hover:bg-gray-800 text-white"
                         }`}
                       >
                         {tone}
@@ -282,7 +282,7 @@ export default function Home() {
 
                 {/* Situation Filter */}
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground block mb-2">
+                  <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 block mb-2">
                     Situation
                   </label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
@@ -290,8 +290,8 @@ export default function Home() {
                       onClick={() => setSelectedSituation(null)}
                       className={`w-full text-left px-2 py-1 text-sm rounded transition ${
                         selectedSituation === null
-                          ? "bg-foreground text-white"
-                          : "hover:bg-border text-foreground"
+                          ? "bg-purple-600 text-white"
+                          : "hover:bg-gray-800 text-white"
                       }`}
                     >
                       All Situations
@@ -302,8 +302,8 @@ export default function Home() {
                         onClick={() => setSelectedSituation(situation)}
                         className={`w-full text-left px-2 py-1 text-sm rounded transition ${
                           selectedSituation === situation
-                            ? "bg-foreground text-white"
-                            : "hover:bg-border text-foreground"
+                            ? "bg-purple-600 text-white"
+                            : "hover:bg-gray-800 text-white"
                         }`}
                       >
                         {situation}
@@ -321,7 +321,7 @@ export default function Home() {
               selectedSituation) && (
               <div className="flex flex-wrap gap-2">
                 {selectedPlatform && (
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-foreground text-white text-xs rounded">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-600 text-white text-xs rounded">
                     {selectedPlatform}
                     <button
                       onClick={() => setSelectedPlatform(null)}
@@ -332,7 +332,7 @@ export default function Home() {
                   </div>
                 )}
                 {selectedCategory && (
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-foreground text-white text-xs rounded">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-600 text-white text-xs rounded">
                     {selectedCategory}
                     <button
                       onClick={() => setSelectedCategory(null)}
@@ -343,7 +343,7 @@ export default function Home() {
                   </div>
                 )}
                 {selectedTone && (
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-foreground text-white text-xs rounded">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-600 text-white text-xs rounded">
                     {selectedTone}
                     <button
                       onClick={() => setSelectedTone(null)}
@@ -354,7 +354,7 @@ export default function Home() {
                   </div>
                 )}
                 {selectedSituation && (
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-foreground text-white text-xs rounded">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-600 text-white text-xs rounded">
                     {selectedSituation}
                     <button
                       onClick={() => setSelectedSituation(null)}
@@ -368,7 +368,7 @@ export default function Home() {
             )}
 
             {/* Results Count */}
-            <div className="text-xs text-muted-foreground">
+            <div className="text-xs text-gray-400">
               {showFavoritesOnly ? (
                 <>
                   Showing {filteredPrompts.length} favorite{filteredPrompts.length !== 1 ? "s" : ""} of {favoritesCount} saved
@@ -387,8 +387,8 @@ export default function Home() {
       <main className="container py-8">
         {filteredPrompts.length === 0 ? (
           <div className="text-center py-12">
-            <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-50" />
-            <p className="text-muted-foreground">
+            <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4 opacity-50" />
+            <p className="text-gray-400">
               {showFavoritesOnly
                 ? "No favorite prompts yet. Start bookmarking prompts to save them here!"
                 : "No prompts found. Try adjusting your filters or search query."}
@@ -399,30 +399,30 @@ export default function Home() {
             {filteredPrompts.map((prompt) => (
               <Card
                 key={prompt.id}
-                className="p-4 border border-border hover:border-foreground transition bg-white"
+                className="p-4 border border-border hover:border-purple-600 transition bg-gray-900"
               >
                 <div className="flex justify-between items-start gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap gap-2 mb-3">
-                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-muted text-foreground rounded">
+                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-purple-700 text-white rounded">
                         {prompt.platform}
                       </span>
-                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-muted text-foreground rounded">
+                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-purple-600 text-white rounded">
                         {prompt.category}
                       </span>
-                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-muted text-foreground rounded">
+                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-purple-500 text-white rounded">
                         {prompt.tone}
                       </span>
-                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-muted text-foreground rounded">
+                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-purple-400 text-white rounded">
                         {prompt.situation}
                       </span>
                     </div>
 
-                    <div className="font-mono text-sm leading-relaxed text-foreground bg-muted p-3 rounded border border-border">
+                    <div className="font-mono text-sm leading-relaxed text-white bg-gray-800 p-3 rounded border border-border">
                       {prompt.prompt}
                     </div>
 
-                    <div className="text-xs text-muted-foreground mt-2">
+                    <div className="text-xs text-gray-400 mt-2">
                       Prompt #{prompt.id}
                     </div>
                   </div>
@@ -430,26 +430,26 @@ export default function Home() {
                   <div className="flex-shrink-0 flex gap-2">
                     <button
                       onClick={() => toggleFavorite(prompt.id)}
-                      className="p-2 hover:bg-muted rounded transition"
+                      className="p-2 hover:bg-gray-800 rounded transition"
                       title={isFavorite(prompt.id) ? "Remove from favorites" : "Add to favorites"}
                     >
                       <Heart
                         className={`w-5 h-5 ${
                           isFavorite(prompt.id)
-                            ? "fill-foreground text-foreground"
-                            : "text-muted-foreground hover:text-foreground"
+                            ? "fill-purple-600 text-purple-600"
+                            : "text-gray-400 hover:text-white"
                         }`}
                       />
                     </button>
                     <button
                       onClick={() => copyToClipboard(prompt.prompt, prompt.id)}
-                      className="p-2 hover:bg-muted rounded transition"
+                      className="p-2 hover:bg-gray-800 rounded transition"
                       title="Copy prompt"
                     >
                       {copiedId === prompt.id ? (
-                        <Check className="w-5 h-5 text-foreground" />
+                        <Check className="w-5 h-5 text-white" />
                       ) : (
-                        <Copy className="w-5 h-5 text-muted-foreground hover:text-foreground" />
+                        <Copy className="w-5 h-5 text-gray-400 hover:text-white" />
                       )}
                     </button>
                   </div>
@@ -461,28 +461,28 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-white mt-12">
+      <footer className="border-t border-border bg-black mt-12">
         <div className="container py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-              <p className="text-sm font-semibold text-foreground">
+              <p className="text-sm font-semibold text-white">
                 AI Community Manager OS
               </p>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-xs text-gray-400 mt-1">
                 10,000 AI-Ready Prompts for Community Managers
               </p>
             </div>
             <div className="text-right">
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">
                 Made by
               </p>
-              <p className="text-sm font-semibold text-foreground">
+              <p className="text-sm font-semibold text-white">
                 Spark Collective
               </p>
             </div>
           </div>
           <div className="border-t border-border mt-6 pt-6 text-center">
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-gray-400">
               © 2026 Spark Collective. All rights reserved.
             </p>
           </div>
