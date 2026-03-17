@@ -132,12 +132,14 @@ export default function Home() {
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
-                  Made by
-                </p>
-                <p className="text-sm font-semibold text-foreground">
-                  Spark Collective
-                </p>
+                <a
+                  href="https://nestuge.me/sparkcollective"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-6 py-2 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors shadow-sm hover:shadow-md"
+                >
+                  Buy Full Template
+                </a>
               </div>
             </div>
 
