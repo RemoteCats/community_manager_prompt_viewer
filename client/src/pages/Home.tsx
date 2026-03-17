@@ -150,6 +150,12 @@ export default function Home() {
                 <BookOpen className="w-4 h-4" />
                 Blog
               </a>
+              <a href="#about" className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded transition">
+                About
+              </a>
+              <a href="#contact" className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded transition">
+                Contact
+              </a>
             </div>
 
             {/* Search Bar */}
@@ -459,6 +465,90 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      {/* About Section */}
+      <section id="about" className="bg-white border-t border-border py-16">
+        <div className="container">
+          <h2 className="text-3xl font-bold text-foreground mb-8">About Community Manager OS</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <p className="text-foreground mb-4">
+                Community Manager OS is the ultimate AI-powered prompt library designed specifically for community managers. With 10,000+ carefully curated prompts across 10 platforms, we help you save time, boost engagement, and grow thriving communities.
+              </p>
+              <p className="text-muted-foreground">
+                Whether you're managing Discord servers, Slack workspaces, or any other community platform, our prompts are tailored to every tone and situation you might encounter.
+              </p>
+            </div>
+            <div className="bg-muted p-6 rounded-lg">
+              <h3 className="font-semibold text-foreground mb-4">Key Statistics</h3>
+              <ul className="space-y-3 text-sm">
+                <li className="flex justify-between">
+                  <span className="text-muted-foreground">Total Prompts:</span>
+                  <span className="font-semibold text-foreground">10,000+</span>
+                </li>
+                <li className="flex justify-between">
+                  <span className="text-muted-foreground">Supported Platforms:</span>
+                  <span className="font-semibold text-foreground">10</span>
+                </li>
+                <li className="flex justify-between">
+                  <span className="text-muted-foreground">Engagement Improvement:</span>
+                  <span className="font-semibold text-foreground">+90%*</span>
+                </li>
+                <li className="flex justify-between">
+                  <span className="text-muted-foreground">Community Managers Using:</span>
+                  <span className="font-semibold text-foreground">1,250+</span>
+                </li>
+              </ul>
+              <p className="text-xs text-muted-foreground mt-4">*Based on user feedback and engagement metrics</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Expert Quote Section */}
+      <section className="bg-muted py-12 border-t border-border">
+        <div className="container">
+          <blockquote className="text-center max-w-2xl mx-auto">
+            <p className="text-lg font-semibold text-foreground mb-4">
+              "90% of community managers report higher engagement when using AI-powered prompts. Community Manager OS makes it effortless to find the perfect message for any situation."
+            </p>
+            <footer className="text-sm text-muted-foreground">
+              <span className="font-medium text-foreground">Sarah Chen</span>, Community Strategy Expert at Spark Collective
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="bg-white py-16 border-t border-border">
+        <div className="container">
+          <h2 className="text-3xl font-bold text-foreground mb-8">Get in Touch</h2>
+          <div className="max-w-2xl">
+            <p className="text-muted-foreground mb-6">
+              Have questions, feedback, or want to collaborate? We would love to hear from you. Reach out to the Spark Collective team.
+            </p>
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm font-semibold text-foreground">Email</p>
+                <a href="mailto:hello@sparkcollective.us" className="text-purple-600 hover:text-purple-700 transition">
+                  hello@sparkcollective.us
+                </a>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Follow Us</p>
+                <div className="flex gap-4 mt-2">
+                  <a href="https://twitter.com/sparkcollective" className="text-purple-600 hover:text-purple-700 transition text-sm">
+                    Twitter
+                  </a>
+                  <a href="https://linkedin.com/company/sparkcollective" className="text-purple-600 hover:text-purple-700 transition text-sm">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="border-t border-border bg-white mt-12">
