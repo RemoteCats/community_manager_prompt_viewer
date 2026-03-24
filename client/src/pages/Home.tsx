@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useFavorites } from "@/hooks/useFavorites";
+import EventsBanner from "@/components/EventsBanner";
 
 interface Prompt {
   id: number;
@@ -105,6 +106,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Events Banner */}
+      <EventsBanner />
+
       {/* Header */}
       <header className="border-b border-border bg-white sticky top-0 z-50 shadow-sm">
         <div className="container py-6">
