@@ -1,13 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
-import { Search, Copy, Check, Filter, X, Heart, BookOpen } from "lucide-react";
+import { Search, Copy, Check, Filter, X, Heart, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useFavorites } from "@/hooks/useFavorites";
-import EventsBanner from "@/components/EventsBanner";
 import Sidebar from "@/components/Sidebar";
-import ProductShowcase from "@/components/ProductShowcase";
+import EventsBanner from "@/components/EventsBanner";
 
 interface Prompt {
   id: number;
@@ -17,6 +16,9 @@ interface Prompt {
   situation: string;
   prompt: string;
 }
+
+const LOGO_URL = "/spark-collective-logo.png";
+const PROMPTS_PER_PAGE = 10;
 
 export default function Home() {
   const [, setLocation] = useLocation();
@@ -30,11 +32,9 @@ export default function Home() {
   const [showFilters, setShowFilters] = useState(false);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  
-  const { favorites, toggleFavorite, isFavorite, clearFavorites, count: favoritesCount } = useFavorites();
-  const ITEMS_PER_PAGE = 50;
 
-  // Load prompts from JSON
+  const { favorites, toggleFavorite, isFavorite, count: favoritesCount } = useFavorites();
+
   useEffect(() => {
     fetch("/prompts.json")
       .then((res) => res.json())
@@ -42,7 +42,6 @@ export default function Home() {
       .catch((err) => console.error("Error loading prompts:", err));
   }, []);
 
-  // Get unique values for filters
   const platforms = useMemo(
     () => Array.from(new Set(prompts.map((p) => p.platform))).sort(),
     [prompts]
@@ -60,10 +59,8 @@ export default function Home() {
     [prompts]
   );
 
-  // Filter prompts
   const filteredPrompts = useMemo(() => {
     return prompts.filter((prompt) => {
-      // Check if favorites-only filter is active
       if (showFavoritesOnly && !isFavorite(prompt.id)) {
         return false;
       }
@@ -74,48 +71,25 @@ export default function Home() {
         prompt.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
         prompt.tone.toLowerCase().includes(searchQuery.toLowerCase());
 
-      const matchesPlatform =
-        selectedPlatform === null || prompt.platform === selectedPlatform;
-      const matchesCategory =
-        selectedCategory === null || prompt.category === selectedCategory;
+      const matchesPlatform = selectedPlatform === null || prompt.platform === selectedPlatform;
+      const matchesCategory = selectedCategory === null || prompt.category === selectedCategory;
       const matchesTone = selectedTone === null || prompt.tone === selectedTone;
-      const matchesSituation =
-        selectedSituation === null || prompt.situation === selectedSituation;
+      const matchesSituation = selectedSituation === null || prompt.situation === selectedSituation;
 
-      return (
-        matchesSearch &&
-        matchesPlatform &&
-        matchesCategory &&
-        matchesTone &&
-        matchesSituation
-      );
+      return matchesSearch && matchesPlatform && matchesCategory && matchesTone && matchesSituation;
     });
-  }, [
-    prompts,
-    searchQuery,
-    selectedPlatform,
-    selectedCategory,
-    selectedTone,
-    selectedSituation,
-    showFavoritesOnly,
-    favorites,
-  ]);
+  }, [prompts, searchQuery, selectedPlatform, selectedCategory, selectedTone, selectedSituation, showFavoritesOnly, favorites]);
 
-  // Paginate filtered prompts - NOW AFTER filteredPrompts is defined
+  const totalPages = Math.ceil(filteredPrompts.length / PROMPTS_PER_PAGE);
   const paginatedPrompts = useMemo(() => {
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    return filteredPrompts.slice(startIndex, endIndex);
+    const startIdx = (currentPage - 1) * PROMPTS_PER_PAGE;
+    return filteredPrompts.slice(startIdx, startIdx + PROMPTS_PER_PAGE);
   }, [filteredPrompts, currentPage]);
 
-  const totalPages = Math.ceil(filteredPrompts.length / ITEMS_PER_PAGE);
-
-  // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery, selectedPlatform, selectedCategory, selectedTone, selectedSituation, showFavoritesOnly]);
 
-  // Copy to clipboard
   const copyToClipboard = (text: string, id: number) => {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
@@ -123,93 +97,51 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Sidebar Navigation */}
-      <Sidebar />
+    <div className="min-h-screen bg-white">
+      {/* Logo at Top */}
+      <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-b border-purple-100 py-4 px-4">
+        <div className="container max-w-7xl mx-auto">
+          <button onClick={() => setLocation("/")} className="hover:opacity-80 transition-opacity" title="Go to home">
+            <img src={LOGO_URL} alt="Spark Collective" className="h-12 w-auto" />
+          </button>
+        </div>
+      </div>
 
-      {/* Product Showcase */}
-      <ProductShowcase />
-      {/* Events Banner */}
+      {/* Firecrawl Events Tracker Banner */}
       <EventsBanner />
 
-      {/* Header */}
-      <header className="border-b border-border bg-white sticky top-0 z-50 shadow-sm">
-        <div className="container py-6">
-          <div className="flex flex-col gap-4">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-4">
-                <button
-                  onClick={() => setLocation('/')}
-                  className="hover:opacity-80 transition-opacity"
-                  title="Go to home"
-                >
-                  <img 
-                    src="/spark-collective-logo.png" 
-                    alt="Spark Collective" 
-                    className="h-32 w-auto cursor-pointer"
-                  />
-                </button>
-                <div>
-                  <h1 className="text-4xl font-bold tracking-tight text-foreground">
-                    AI Community Manager OS
-                  </h1>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    10,000 AI-Ready Prompts for Every Platform, Tone & Situation
-                  </p>
-                </div>
-              </div>
-              <div className="text-right">
-                <a
-                  href="https://nestuge.me/sparkcollective"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-6 py-2 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors shadow-sm hover:shadow-md"
-                >
-                  Buy Full Template
-                </a>
-              </div>
-            </div>
+      <div className="flex">
+        {/* Sidebar */}
+        <Sidebar />
 
-            {/* Navigation */}
-            <div className="flex gap-2 border-t border-border pt-4 -mx-6 px-6">
-              <a href="/" className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded transition">
-                Prompts
-              </a>
-              <a href="/blog" className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded transition flex items-center gap-2">
-                <BookOpen className="w-4 h-4" />
-                Blog
-              </a>
-              <a href="#about" className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded transition">
-                About
-              </a>
-              <a href="#contact" className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded transition">
-                Contact
-              </a>
+        {/* Main Content */}
+        <main className="flex-1 w-full">
+          <div className="container max-w-7xl mx-auto py-8 px-4">
+            {/* Header */}
+            <div className="mb-8">
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">AI Community Manager OS</h1>
+              <p className="text-lg text-gray-600">10,000 AI-Ready Prompts for Every Platform, Tone & Situation</p>
             </div>
 
             {/* Search Bar */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 mb-6">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <Input
                   placeholder="Search prompts by keyword, category, or tone..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 bg-muted border-border text-foreground placeholder:text-muted-foreground"
+                  className="pl-10 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400"
                 />
               </div>
-              <Button
-                onClick={() => setShowFilters(!showFilters)}
-                variant="outline"
-                className="border-border"
-              >
+              <Button onClick={() => setShowFilters(!showFilters)} variant="outline" className="border-gray-200">
                 <Filter className="w-4 h-4 mr-2" />
                 Filters
               </Button>
               <Button
                 onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
                 variant={showFavoritesOnly ? "default" : "outline"}
-                className={showFavoritesOnly ? "bg-foreground text-white" : "border-border"}
+                className={showFavoritesOnly ? "bg-purple-600 text-white border-purple-600" : "border-gray-200"}
               >
                 <Heart className="w-4 h-4 mr-2" />
                 Favorites {favoritesCount > 0 && `(${favoritesCount})`}
@@ -218,20 +150,13 @@ export default function Home() {
 
             {/* Filters */}
             {showFilters && (
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-3 p-4 bg-muted border border-border rounded">
-                {/* Platform Filter */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-3 p-4 bg-gray-50 border border-gray-200 rounded-lg mb-6">
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground block mb-2">
-                    Platform
-                  </label>
+                  <label className="text-xs font-semibold uppercase tracking-widest text-gray-600 block mb-2">Platform</label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
                     <button
                       onClick={() => setSelectedPlatform(null)}
-                      className={`w-full text-left px-2 py-1 text-sm rounded transition ${
-                        selectedPlatform === null
-                          ? "bg-foreground text-white"
-                          : "hover:bg-border text-foreground"
-                      }`}
+                      className={`w-full text-left px-2 py-1 text-sm rounded transition ${selectedPlatform === null ? "bg-purple-600 text-white" : "hover:bg-gray-200 text-gray-900"}`}
                     >
                       All Platforms
                     </button>
@@ -239,11 +164,7 @@ export default function Home() {
                       <button
                         key={platform}
                         onClick={() => setSelectedPlatform(platform)}
-                        className={`w-full text-left px-2 py-1 text-sm rounded transition ${
-                          selectedPlatform === platform
-                            ? "bg-foreground text-white"
-                            : "hover:bg-border text-foreground"
-                        }`}
+                        className={`w-full text-left px-2 py-1 text-sm rounded transition ${selectedPlatform === platform ? "bg-purple-600 text-white" : "hover:bg-gray-200 text-gray-900"}`}
                       >
                         {platform}
                       </button>
@@ -251,19 +172,12 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Category Filter */}
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground block mb-2">
-                    Category
-                  </label>
+                  <label className="text-xs font-semibold uppercase tracking-widest text-gray-600 block mb-2">Category</label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
                     <button
                       onClick={() => setSelectedCategory(null)}
-                      className={`w-full text-left px-2 py-1 text-sm rounded transition ${
-                        selectedCategory === null
-                          ? "bg-foreground text-white"
-                          : "hover:bg-border text-foreground"
-                      }`}
+                      className={`w-full text-left px-2 py-1 text-sm rounded transition ${selectedCategory === null ? "bg-purple-600 text-white" : "hover:bg-gray-200 text-gray-900"}`}
                     >
                       All Categories
                     </button>
@@ -271,11 +185,7 @@ export default function Home() {
                       <button
                         key={category}
                         onClick={() => setSelectedCategory(category)}
-                        className={`w-full text-left px-2 py-1 text-sm rounded transition ${
-                          selectedCategory === category
-                            ? "bg-foreground text-white"
-                            : "hover:bg-border text-foreground"
-                        }`}
+                        className={`w-full text-left px-2 py-1 text-sm rounded transition ${selectedCategory === category ? "bg-purple-600 text-white" : "hover:bg-gray-200 text-gray-900"}`}
                       >
                         {category}
                       </button>
@@ -283,19 +193,12 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Tone Filter */}
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground block mb-2">
-                    Tone
-                  </label>
+                  <label className="text-xs font-semibold uppercase tracking-widest text-gray-600 block mb-2">Tone</label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
                     <button
                       onClick={() => setSelectedTone(null)}
-                      className={`w-full text-left px-2 py-1 text-sm rounded transition ${
-                        selectedTone === null
-                          ? "bg-foreground text-white"
-                          : "hover:bg-border text-foreground"
-                      }`}
+                      className={`w-full text-left px-2 py-1 text-sm rounded transition ${selectedTone === null ? "bg-purple-600 text-white" : "hover:bg-gray-200 text-gray-900"}`}
                     >
                       All Tones
                     </button>
@@ -303,11 +206,7 @@ export default function Home() {
                       <button
                         key={tone}
                         onClick={() => setSelectedTone(tone)}
-                        className={`w-full text-left px-2 py-1 text-sm rounded transition ${
-                          selectedTone === tone
-                            ? "bg-foreground text-white"
-                            : "hover:bg-border text-foreground"
-                        }`}
+                        className={`w-full text-left px-2 py-1 text-sm rounded transition ${selectedTone === tone ? "bg-purple-600 text-white" : "hover:bg-gray-200 text-gray-900"}`}
                       >
                         {tone}
                       </button>
@@ -315,19 +214,12 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Situation Filter */}
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground block mb-2">
-                    Situation
-                  </label>
+                  <label className="text-xs font-semibold uppercase tracking-widest text-gray-600 block mb-2">Situation</label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
                     <button
                       onClick={() => setSelectedSituation(null)}
-                      className={`w-full text-left px-2 py-1 text-sm rounded transition ${
-                        selectedSituation === null
-                          ? "bg-foreground text-white"
-                          : "hover:bg-border text-foreground"
-                      }`}
+                      className={`w-full text-left px-2 py-1 text-sm rounded transition ${selectedSituation === null ? "bg-purple-600 text-white" : "hover:bg-gray-200 text-gray-900"}`}
                     >
                       All Situations
                     </button>
@@ -335,11 +227,7 @@ export default function Home() {
                       <button
                         key={situation}
                         onClick={() => setSelectedSituation(situation)}
-                        className={`w-full text-left px-2 py-1 text-sm rounded transition ${
-                          selectedSituation === situation
-                            ? "bg-foreground text-white"
-                            : "hover:bg-border text-foreground"
-                        }`}
+                        className={`w-full text-left px-2 py-1 text-sm rounded transition ${selectedSituation === situation ? "bg-purple-600 text-white" : "hover:bg-gray-200 text-gray-900"}`}
                       >
                         {situation}
                       </button>
@@ -350,51 +238,36 @@ export default function Home() {
             )}
 
             {/* Active Filters Display */}
-            {(selectedPlatform ||
-              selectedCategory ||
-              selectedTone ||
-              selectedSituation) && (
-              <div className="flex flex-wrap gap-2">
+            {(selectedPlatform || selectedCategory || selectedTone || selectedSituation) && (
+              <div className="flex flex-wrap gap-2 mb-6">
                 {selectedPlatform && (
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-foreground text-white text-xs rounded">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-600 text-white text-xs rounded">
                     {selectedPlatform}
-                    <button
-                      onClick={() => setSelectedPlatform(null)}
-                      className="hover:opacity-70"
-                    >
+                    <button onClick={() => setSelectedPlatform(null)} className="hover:opacity-70">
                       <X className="w-3 h-3" />
                     </button>
                   </div>
                 )}
                 {selectedCategory && (
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-foreground text-white text-xs rounded">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-600 text-white text-xs rounded">
                     {selectedCategory}
-                    <button
-                      onClick={() => setSelectedCategory(null)}
-                      className="hover:opacity-70"
-                    >
+                    <button onClick={() => setSelectedCategory(null)} className="hover:opacity-70">
                       <X className="w-3 h-3" />
                     </button>
                   </div>
                 )}
                 {selectedTone && (
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-foreground text-white text-xs rounded">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-600 text-white text-xs rounded">
                     {selectedTone}
-                    <button
-                      onClick={() => setSelectedTone(null)}
-                      className="hover:opacity-70"
-                    >
+                    <button onClick={() => setSelectedTone(null)} className="hover:opacity-70">
                       <X className="w-3 h-3" />
                     </button>
                   </div>
                 )}
                 {selectedSituation && (
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-foreground text-white text-xs rounded">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-600 text-white text-xs rounded">
                     {selectedSituation}
-                    <button
-                      onClick={() => setSelectedSituation(null)}
-                      className="hover:opacity-70"
-                    >
+                    <button onClick={() => setSelectedSituation(null)} className="hover:opacity-70">
                       <X className="w-3 h-3" />
                     </button>
                   </div>
@@ -403,237 +276,115 @@ export default function Home() {
             )}
 
             {/* Results Count */}
-            <div className="text-xs text-muted-foreground">
+            <div className="text-sm text-gray-600 mb-6">
               {showFavoritesOnly ? (
-                <>
-                  Showing {paginatedPrompts.length} favorite{paginatedPrompts.length !== 1 ? "s" : ""} on page {currentPage} of {totalPages} ({favoritesCount} total saved)
-                </>
+                <>Showing {paginatedPrompts.length} of {filteredPrompts.length} favorite{filteredPrompts.length !== 1 ? "s" : ""}</>
               ) : (
-                <>
-                  Showing {paginatedPrompts.length} of {filteredPrompts.length} prompts (page {currentPage} of {totalPages})
-                </>
+                <>Showing {paginatedPrompts.length} of {filteredPrompts.length} prompts</>
               )}
             </div>
-          </div>
-        </div>
-      </header>
 
-      {/* Main Content */}
-      <main className="container py-8">
-        {paginatedPrompts.length === 0 ? (
-          <div className="text-center py-12">
-            <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-50" />
-            <p className="text-muted-foreground">
-              {showFavoritesOnly
-                ? "No favorite prompts yet. Start bookmarking prompts to save them here!"
-                : "No prompts found. Try adjusting your filters or search query."}
-            </p>
-          </div>
-        ) : (
-          <div className="grid gap-4">
-            {paginatedPrompts.map((prompt) => (
-              <Card
-                key={prompt.id}
-                className="p-4 border border-border hover:border-foreground transition bg-white"
-              >
-                <div className="flex justify-between items-start gap-4">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-muted text-foreground rounded">
-                        {prompt.platform}
-                      </span>
-                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-purple-100 text-purple-700 rounded">
-                        {prompt.category}
-                      </span>
-                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-muted text-foreground rounded">
-                        {prompt.tone}
-                      </span>
-                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-muted text-foreground rounded">
-                        {prompt.situation}
-                      </span>
-                    </div>
-
-                    <div className="font-mono text-sm leading-relaxed text-foreground bg-muted p-3 rounded border border-border">
-                      {prompt.prompt}
-                    </div>
-
-                    <div className="text-xs text-muted-foreground mt-2">
-                      Prompt #{prompt.id}
-                    </div>
-                  </div>
-
-                  <div className="flex-shrink-0 flex gap-2">
-                    <button
-                      onClick={() => toggleFavorite(prompt.id)}
-                      className="p-2 hover:bg-muted rounded transition"
-                      title={isFavorite(prompt.id) ? "Remove from favorites" : "Add to favorites"}
-                    >
-                      <Heart
-                        className={`w-5 h-5 ${
-                          isFavorite(prompt.id)
-                            ? "fill-purple-600 text-purple-600"
-                            : "text-muted-foreground hover:text-foreground"
-                        }`}
-                      />
-                    </button>
-                    <button
-                      onClick={() => copyToClipboard(prompt.prompt, prompt.id)}
-                      className="p-2 hover:bg-muted rounded transition"
-                      title="Copy prompt"
-                    >
-                      {copiedId === prompt.id ? (
-                        <Check className="w-5 h-5 text-foreground" />
-                      ) : (
-                        <Copy className="w-5 h-5 text-muted-foreground hover:text-foreground" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        )}
-
-        {/* Pagination Controls */}
-        {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-4 mt-8 py-6 border-t border-border">
-            <button
-              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-              disabled={currentPage === 1}
-              className="px-4 py-2 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition"
-            >
-              Previous
-            </button>
-            
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">
-                Page {currentPage} of {totalPages}
-              </span>
-            </div>
-            
-            <button
-              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-              disabled={currentPage === totalPages}
-              className="px-4 py-2 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition"
-            >
-              Next
-            </button>
-          </div>
-        )}
-      </main>
-
-      {/* About Section */}
-      <section id="about" className="bg-white border-t border-border py-16">
-        <div className="container">
-          <h2 className="text-3xl font-bold text-foreground mb-8">About Community Manager OS</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <p className="text-foreground mb-4">
-                Community Manager OS is the ultimate AI-powered prompt library designed specifically for community managers. With 10,000+ carefully curated prompts across 10 platforms, we help you save time, boost engagement, and grow thriving communities.
-              </p>
-              <p className="text-muted-foreground">
-                Whether you're managing Discord servers, Slack workspaces, or any other community platform, our prompts are tailored to every tone and situation you might encounter.
-              </p>
-            </div>
-            <div className="bg-muted p-6 rounded-lg">
-              <h3 className="font-semibold text-foreground mb-4">Key Statistics</h3>
-              <ul className="space-y-3 text-sm">
-                <li className="flex justify-between">
-                  <span className="text-muted-foreground">Total Prompts:</span>
-                  <span className="font-semibold text-foreground">10,000+</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="text-muted-foreground">Supported Platforms:</span>
-                  <span className="font-semibold text-foreground">10</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="text-muted-foreground">Engagement Improvement:</span>
-                  <span className="font-semibold text-foreground">+90%*</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="text-muted-foreground">Community Managers Using:</span>
-                  <span className="font-semibold text-foreground">1,250+</span>
-                </li>
-              </ul>
-              <p className="text-xs text-muted-foreground mt-4">*Based on user feedback and engagement metrics</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Expert Quote Section */}
-      <section className="bg-muted py-12 border-t border-border">
-        <div className="container">
-          <blockquote className="text-center max-w-2xl mx-auto">
-            <p className="text-lg font-semibold text-foreground mb-4">
-              "90% of community managers report higher engagement when using AI-powered prompts. Community Manager OS makes it effortless to find the perfect message for any situation."
-            </p>
-            <footer className="text-sm text-muted-foreground">
-              <span className="font-medium text-foreground">Sarah Chen</span>, Community Strategy Expert at Spark Collective
-            </footer>
-          </blockquote>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="bg-white py-16 border-t border-border">
-        <div className="container">
-          <h2 className="text-3xl font-bold text-foreground mb-8">Get in Touch</h2>
-          <div className="max-w-2xl">
-            <p className="text-muted-foreground mb-6">
-              Have questions, feedback, or want to collaborate? We would love to hear from you. Reach out to the Spark Collective team.
-            </p>
-            <div className="space-y-4">
-              <div>
-                <p className="text-sm font-semibold text-foreground">Email</p>
-                <a href="mailto:hello@sparkcollective.us" className="text-purple-600 hover:text-purple-700 transition">
-                  hello@sparkcollective.us
-                </a>
+            {/* Prompts Grid */}
+            {paginatedPrompts.length === 0 ? (
+              <div className="text-center py-12">
+                <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-600">
+                  {showFavoritesOnly
+                    ? "No favorite prompts yet. Start bookmarking prompts to save them here!"
+                    : "No prompts found. Try adjusting your filters or search query."}
+                </p>
               </div>
-              <div>
-                <p className="text-sm font-semibold text-foreground">Follow Us</p>
-                <div className="flex gap-4 mt-2">
-                  <a href="https://twitter.com/sparkcollective" className="text-purple-600 hover:text-purple-700 transition text-sm">
-                    Twitter
-                  </a>
-                  <a href="https://linkedin.com/company/sparkcollective" className="text-purple-600 hover:text-purple-700 transition text-sm">
-                    LinkedIn
-                  </a>
+            ) : (
+              <div className="grid gap-4 mb-8">
+                {paginatedPrompts.map((prompt) => (
+                  <Card key={prompt.id} className="p-4 border border-gray-200 hover:border-purple-300 transition bg-white">
+                    <div className="flex justify-between items-start gap-4">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap gap-2 mb-3">
+                          <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-purple-100 text-purple-700 rounded">
+                            {prompt.platform}
+                          </span>
+                          <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-pink-100 text-pink-700 rounded">
+                            {prompt.category}
+                          </span>
+                          <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-blue-100 text-blue-700 rounded">
+                            {prompt.tone}
+                          </span>
+                          <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-green-100 text-green-700 rounded">
+                            {prompt.situation}
+                          </span>
+                        </div>
+
+                        <div className="font-mono text-sm leading-relaxed text-gray-900 bg-gray-50 p-3 rounded border border-gray-200">
+                          {prompt.prompt}
+                        </div>
+
+                        <div className="text-xs text-gray-500 mt-2">Prompt #{prompt.id}</div>
+                      </div>
+
+                      <div className="flex-shrink-0 flex gap-2">
+                        <button
+                          onClick={() => toggleFavorite(prompt.id)}
+                          className="p-2 hover:bg-gray-100 rounded transition"
+                          title={isFavorite(prompt.id) ? "Remove from favorites" : "Add to favorites"}
+                        >
+                          <Heart
+                            className={`w-5 h-5 ${
+                              isFavorite(prompt.id)
+                                ? "fill-purple-600 text-purple-600"
+                                : "text-gray-400 hover:text-purple-600"
+                            }`}
+                          />
+                        </button>
+                        <button
+                          onClick={() => copyToClipboard(prompt.prompt, prompt.id)}
+                          className="p-2 hover:bg-gray-100 rounded transition"
+                          title="Copy prompt"
+                        >
+                          {copiedId === prompt.id ? (
+                            <Check className="w-5 h-5 text-purple-600" />
+                          ) : (
+                            <Copy className="w-5 h-5 text-gray-400 hover:text-purple-600" />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            )}
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-between mt-8 pt-8 border-t border-gray-200">
+                <div className="text-sm text-gray-600">
+                  Page {currentPage} of {totalPages}
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    variant="outline"
+                    className="border-gray-200"
+                  >
+                    <ChevronLeft className="w-4 h-4 mr-2" />
+                    Previous
+                  </Button>
+                  <Button
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    disabled={currentPage === totalPages}
+                    variant="outline"
+                    className="border-gray-200"
+                  >
+                    Next
+                    <ChevronRight className="w-4 h-4 ml-2" />
+                  </Button>
                 </div>
               </div>
-            </div>
+            )}
           </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border bg-white mt-12">
-        <div className="container py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-              <p className="text-sm font-semibold text-foreground">
-                AI Community Manager OS
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                10,000 AI-Ready Prompts for Community Managers
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
-                Made by
-              </p>
-              <p className="text-sm font-semibold text-foreground">
-                Spark Collective
-              </p>
-            </div>
-          </div>
-          <div className="border-t border-border mt-6 pt-6 text-center">
-            <p className="text-xs text-muted-foreground">
-              © 2026 Spark Collective. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+        </main>
+      </div>
     </div>
   );
 }
