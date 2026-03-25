@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, Home, BookOpen, Info, Mail, ShoppingCart } from "lucide-react";
+import { Menu, X, Home, BookOpen, Info, Mail } from "lucide-react";
 import { useLocation } from "wouter";
 
 export default function Sidebar() {
@@ -28,13 +28,13 @@ export default function Sidebar() {
       {/* Sidebar Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed left-4 top-4 z-50 p-2 rounded-lg bg-white/70 backdrop-blur-xl border border-white/20 hover:bg-white/80 transition-all"
+        className="fixed left-4 top-4 z-50 p-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all"
         aria-label="Toggle sidebar"
       >
         {isOpen ? (
-          <X className="w-6 h-6 text-purple-600" />
+          <X className="w-6 h-6" />
         ) : (
-          <Menu className="w-6 h-6 text-purple-600" />
+          <Menu className="w-6 h-6" />
         )}
       </button>
 
@@ -48,57 +48,50 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed left-0 top-0 h-screen w-64 bg-white/70 backdrop-blur-xl border-r border-white/20 z-40 transition-transform duration-300 slide-in ${
+        className={`fixed left-0 top-0 h-screen w-64 bg-gray-900 border-r border-gray-700 z-40 transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-6 pt-20">
+        <div className="p-6 pt-20 h-full flex flex-col">
           {/* Logo */}
           <div className="mb-8">
-            <img
-              src="/spark-collective-logo.png"
-              alt="Spark Collective"
-              className="h-12 w-auto mb-2"
-            />
-            <h2 className="text-xl font-bold gradient-text">Community Manager OS</h2>
+            <h2 className="text-2xl font-bold text-white">Spark Collective</h2>
+            <p className="text-xs text-gray-400 mt-2">AI Community Manager OS</p>
           </div>
 
           {/* Navigation Menu */}
-          <nav className="space-y-2">
+          <nav className="flex-1 space-y-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
               return (
                 <button
                   key={item.label}
                   onClick={() => handleNavigate(item.href)}
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-purple-100/50 transition-colors group"
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-purple-600/50 hover:text-white transition-colors group"
                 >
-                  <Icon className="w-5 h-5 group-hover:text-purple-600 transition-colors" />
-                  <span className="font-medium group-hover:text-purple-600 transition-colors">
-                    {item.label}
-                  </span>
+                  <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium">{item.label}</span>
                 </button>
               );
             })}
           </nav>
 
           {/* Divider */}
-          <div className="my-6 border-t border-white/20" />
+          <div className="my-6 border-t border-gray-700" />
 
           {/* CTA Button */}
           <a
             href="https://nestuge.me/sparkcollective"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg futuristic-button text-white font-semibold transition-all hover:shadow-xl"
+            className="w-full px-4 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-center hover:shadow-lg transition-all hover:scale-105"
           >
-            <ShoppingCart className="w-5 h-5" />
-            Buy Template
+            Buy Full Template
           </a>
 
           {/* Footer Info */}
-          <div className="mt-8 pt-6 border-t border-white/20">
-            <p className="text-xs text-gray-600 text-center">
+          <div className="mt-4 pt-4 border-t border-gray-700">
+            <p className="text-xs text-gray-400 text-center">
               10,000 AI-Ready Prompts
             </p>
             <p className="text-xs text-gray-500 text-center mt-1">

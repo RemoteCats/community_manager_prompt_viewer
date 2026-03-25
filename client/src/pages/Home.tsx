@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useFavorites } from "@/hooks/useFavorites";
 import EventsBanner from "@/components/EventsBanner";
+import Sidebar from "@/components/Sidebar";
+import ProductShowcase from "@/components/ProductShowcase";
 
 interface Prompt {
   id: number;
@@ -29,6 +31,22 @@ export default function Home() {
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   
   const { favorites, toggleFavorite, isFavorite, clearFavorites, count: favoritesCount } = useFavorites();
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 50;
+
+  // Paginate filtered prompts
+  const paginatedPrompts = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return filteredPrompts.slice(startIndex, endIndex);
+  }, [filteredPrompts, currentPage]);
+
+  const totalPages = Math.ceil(filteredPrompts.length / ITEMS_PER_PAGE);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedPlatform, selectedCategory, selectedTone, selectedSituation, showFavoritesOnly]);
 
   // Load prompts from JSON
   useEffect(() => {
@@ -106,6 +124,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Sidebar Navigation */}
+      <Sidebar />
+
+      {/* Product Showcase */}
+      <ProductShowcase />
       {/* Events Banner */}
       <EventsBanner />
 
@@ -408,7 +431,7 @@ export default function Home() {
           </div>
         ) : (
           <div className="grid gap-4">
-            {filteredPrompts.map((prompt) => (
+            {paginatedPrompts.map((prompt) => (
               <Card
                 key={prompt.id}
                 className="p-4 border border-border hover:border-foreground transition bg-white"
@@ -468,6 +491,32 @@ export default function Home() {
                 </div>
               </Card>
             ))}
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-4 mt-8 py-6 border-t border-border">
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition"
+              >
+                Previous
+              </button>
+              
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">
+                  Page {currentPage} of {totalPages}
+                </span>
+              </div>
+              
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition"
+              >
+                Next
+              </button>
+            </div>
+          )}
           </div>
         )}
       </main>
