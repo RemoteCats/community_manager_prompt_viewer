@@ -98,12 +98,36 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Logo at Top */}
-      <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-b border-purple-100 py-4 px-4">
-        <div className="container max-w-7xl mx-auto">
-          <button onClick={() => setLocation("/")} className="hover:opacity-80 transition-opacity" title="Go to home">
-            <img src={LOGO_URL} alt="Spark Collective" className="h-12 w-auto" />
-          </button>
+      {/* Header with Logo and Product Showcase */}
+      <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-b border-purple-100 py-6 px-4">
+        <div className="container max-w-7xl mx-auto flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">AI Community Manager OS</h1>
+            <p className="text-gray-600 mt-1">Free: 10,000 AI-Ready Prompts</p>
+          </div>
+          <div className="flex items-center gap-6">
+            {/* Product Showcase */}
+            <div className="text-right">
+              <img 
+                src="https://cdn.manus.im/community_manager_os_template.webp" 
+                alt="AI Community Manager OS Template" 
+                className="h-32 w-auto rounded-lg shadow-lg border-2 border-purple-200 mb-2" 
+              />
+              <p className="text-sm font-bold text-gray-900">Buy Full Template</p>
+              <a 
+                href="https://nestuge.me/sparkcollective" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block mt-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm font-semibold"
+              >
+                Get Premium Version
+              </a>
+            </div>
+            {/* Logo */}
+            <button onClick={() => setLocation("/")} className="hover:opacity-80 transition-opacity" title="Go to home">
+              <img src={LOGO_URL} alt="Spark Collective" className="h-16 w-auto" />
+            </button>
+          </div>
         </div>
       </div>
 
