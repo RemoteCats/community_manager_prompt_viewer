@@ -1,5 +1,3 @@
-import { ArrowRight } from "lucide-react";
-
 const PRODUCT_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663125095136/73XCVvWpcYFwjyUFSr5itr/hf_20260313_070937_2700dbee-9691-4722-94a8-185bed2b16cc_325112f4.webp";
 
 export default function ProductShowcase() {
@@ -31,22 +29,10 @@ export default function ProductShowcase() {
             </div>
           </div>
 
-          {/* Right - Product Image with Arrows */}
-          <div className="flex-1 relative">
-            {/* Top Left Arrow */}
-            <div className="absolute -top-12 left-0 flex items-center gap-2 animate-bounce">
-              <ArrowRight className="w-8 h-8 text-purple-600 rotate-180" strokeWidth={3} />
-              <ArrowRight className="w-8 h-8 text-purple-600 rotate-180" strokeWidth={3} />
-            </div>
-
-            {/* Bottom Right Arrow */}
-            <div className="absolute -bottom-12 right-0 flex items-center gap-2 animate-bounce" style={{ animationDelay: "0.2s" }}>
-              <ArrowRight className="w-8 h-8 text-purple-600" strokeWidth={3} />
-              <ArrowRight className="w-8 h-8 text-purple-600" strokeWidth={3} />
-            </div>
-
+          {/* Right - Product Image */}
+          <div className="flex-1">
             {/* Product Image */}
-            <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow">
+            <div className="rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow">
               <img
                 src={PRODUCT_IMAGE}
                 alt="AI Community Manager OS Premium Template"
