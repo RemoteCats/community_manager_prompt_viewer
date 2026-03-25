@@ -29,24 +29,10 @@ export default function Home() {
   const [copiedId, setCopiedId] = useState<number | null>(null);
   const [showFilters, setShowFilters] = useState(false);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   
   const { favorites, toggleFavorite, isFavorite, clearFavorites, count: favoritesCount } = useFavorites();
-  const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 50;
-
-  // Paginate filtered prompts
-  const paginatedPrompts = useMemo(() => {
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    return filteredPrompts.slice(startIndex, endIndex);
-  }, [filteredPrompts, currentPage]);
-
-  const totalPages = Math.ceil(filteredPrompts.length / ITEMS_PER_PAGE);
-
-  // Reset to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery, selectedPlatform, selectedCategory, selectedTone, selectedSituation, showFavoritesOnly]);
 
   // Load prompts from JSON
   useEffect(() => {
@@ -114,6 +100,20 @@ export default function Home() {
     showFavoritesOnly,
     favorites,
   ]);
+
+  // Paginate filtered prompts - NOW AFTER filteredPrompts is defined
+  const paginatedPrompts = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return filteredPrompts.slice(startIndex, endIndex);
+  }, [filteredPrompts, currentPage]);
+
+  const totalPages = Math.ceil(filteredPrompts.length / ITEMS_PER_PAGE);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedPlatform, selectedCategory, selectedTone, selectedSituation, showFavoritesOnly]);
 
   // Copy to clipboard
   const copyToClipboard = (text: string, id: number) => {
@@ -406,11 +406,11 @@ export default function Home() {
             <div className="text-xs text-muted-foreground">
               {showFavoritesOnly ? (
                 <>
-                  Showing {filteredPrompts.length} favorite{filteredPrompts.length !== 1 ? "s" : ""} of {favoritesCount} saved
+                  Showing {paginatedPrompts.length} favorite{paginatedPrompts.length !== 1 ? "s" : ""} on page {currentPage} of {totalPages} ({favoritesCount} total saved)
                 </>
               ) : (
                 <>
-                  Showing {filteredPrompts.length} of {prompts.length} prompts
+                  Showing {paginatedPrompts.length} of {filteredPrompts.length} prompts (page {currentPage} of {totalPages})
                 </>
               )}
             </div>
@@ -420,7 +420,7 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="container py-8">
-        {filteredPrompts.length === 0 ? (
+        {paginatedPrompts.length === 0 ? (
           <div className="text-center py-12">
             <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-50" />
             <p className="text-muted-foreground">
@@ -442,7 +442,7 @@ export default function Home() {
                       <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-muted text-foreground rounded">
                         {prompt.platform}
                       </span>
-                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-muted text-foreground rounded">
+                      <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-purple-100 text-purple-700 rounded">
                         {prompt.category}
                       </span>
                       <span className="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-widest bg-muted text-foreground rounded">
@@ -471,7 +471,7 @@ export default function Home() {
                       <Heart
                         className={`w-5 h-5 ${
                           isFavorite(prompt.id)
-                            ? "fill-foreground text-foreground"
+                            ? "fill-purple-600 text-purple-600"
                             : "text-muted-foreground hover:text-foreground"
                         }`}
                       />
@@ -491,32 +491,33 @@ export default function Home() {
                 </div>
               </Card>
             ))}
-          {/* Pagination Controls */}
-          {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-4 mt-8 py-6 border-t border-border">
-              <button
-                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                disabled={currentPage === 1}
-                className="px-4 py-2 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition"
-              >
-                Previous
-              </button>
-              
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">
-                  Page {currentPage} of {totalPages}
-                </span>
-              </div>
-              
-              <button
-                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                disabled={currentPage === totalPages}
-                className="px-4 py-2 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition"
-              >
-                Next
-              </button>
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-4 mt-8 py-6 border-t border-border">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition"
+            >
+              Previous
+            </button>
+            
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">
+                Page {currentPage} of {totalPages}
+              </span>
             </div>
-          )}
+            
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 rounded border border-border hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition"
+            >
+              Next
+            </button>
           </div>
         )}
       </main>
