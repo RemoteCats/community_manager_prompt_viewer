@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, X, Sparkles } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,9 +9,10 @@ export default function EventsBanner() {
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Get featured events for banner
-  const { data: featuredItems } = trpc.aggregator.getFeaturedItems.useQuery();
+  const { data: featuredItems, isLoading: isFeaturedLoading } = trpc.aggregator.getFeaturedItems.useQuery();
   const { data: searchEvents } = trpc.aggregator.searchEvents.useQuery(
     { query: searchQuery, limit: 10 },
     { enabled: searchQuery.length > 0 }
@@ -52,7 +53,7 @@ export default function EventsBanner() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-purple-600 to-purple-700 text-white py-4 px-4 sticky top-0 z-40 shadow-lg">
+    <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 text-white py-4 px-4 sticky top-16 z-40 shadow-xl">
       <div className="container">
         {showSearch ? (
           <div className="flex gap-2">
@@ -90,7 +91,12 @@ export default function EventsBanner() {
             </button>
 
             <div className="flex-1 min-w-0">
-              {currentEvent && (
+              {isFeaturedLoading ? (
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 animate-spin" />
+                  <span className="text-sm">Loading AI events...</span>
+                </div>
+              ) : currentEvent ? (
                 <div className="flex flex-col gap-1">
                   <h3 className="font-semibold text-sm truncate">
                     {currentEvent.title}
@@ -115,6 +121,8 @@ export default function EventsBanner() {
                     </a>
                   )}
                 </div>
+              ) : (
+                <p className="text-sm text-white/80">No events available</p>
               )}
             </div>
 
